@@ -45,11 +45,14 @@
 % --------------- Usamos arquivos pdf/png como figuras
 \RequirePackage{graphicx}
 \RequirePackage{titlesec}
-
+% --------------- Formatação das captions de figuras e tabelas
+\RequirePackage[font=small,format=plain,labelfont=bf,up,textfont=it,up]{caption}
 \RequirePackage{newtxmath,newtxtext}
-
-\RequirePackage{hyperref}
-
+% --------------- Links em preto
+\RequirePackage[pdftex,unicode=true,plainpages=false,pdfpagelabels,pagebackref,colorlinks=true,citecolor=black,linkcolor=black,urlcolor=black,filecolor=black,bookmarksopen=true]{hyperref}
+% --------------- soluciona o problema com o hyperref e capitulos
+\RequirePackage[all]{hypcap}
+\RequirePackage[nottoc,numbib]{tocbibind}
 \RequirePackage{helvet}
 
 \RequirePackage{lineno}
@@ -255,12 +258,12 @@ CIÊNCIAS HUMANAS, SOCIAIS APLICADAS E LETRAS \par }
 \newcommand{\colorsection}[2]{%
   \colorbox{white}{\parbox{\dimexpr\textwidth-2\fboxsep}{\color{black}\MakeUppercase{ #1~.~#2}}}}
 \renewcommand{\thechapter}{\arabic{chapter}}
-\titleformat{\chapter}[display]
+\titleformat{\chapter}		
   {\bf}
   {}
   {-5pt}
   {\colorsection\thechapter}
-\titlespacing*{\chapter}{0pt}{0pt}{\baselineskip}
+\titlespacing*{\chapter}{0pt}{20pt}{\baselineskip}
 
 
 \newcommand{\colorsectionss}[2]{%
@@ -291,9 +294,6 @@ CIÊNCIAS HUMANAS, SOCIAIS APLICADAS E LETRAS \par }
 %\patchcmd{\chapter}{\if@openright\cleardoublepage\else\clearpage\fi}{}{}{}
 %\makeatother
 
-\newcommand\status[1]{%
-  \global\def\local@status{#1}%
-}
 
 \renewcommand\author[2]{%
   \global\def\@authname{#1}
