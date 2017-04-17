@@ -38,7 +38,7 @@
 \definecolor{cor}{RGB}{102,102,102}
 
 % --------------- Margens
-\RequirePackage[a4paper,top=1cm,bottom=2cm,left=3cm,right=1.5cm]{geometry} 
+\RequirePackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=2cm]{geometry} 
 \RequirePackage{pdfpages}
 % --------------- Utilização da marca d'agua
 \RequirePackage{wallpaper}  
@@ -263,7 +263,7 @@ CIÊNCIAS HUMANAS, SOCIAIS APLICADAS E LETRAS \par }
   {}
   {-5pt}
   {\colorsection\thechapter}
-\titlespacing*{\chapter}{0pt}{20pt}{\baselineskip}
+\titlespacing*{\chapter}{0pt}{-20pt}{\baselineskip}
 
 
 \newcommand{\colorsectionss}[2]{%
