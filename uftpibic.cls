@@ -256,7 +256,11 @@ CIÊNCIAS HUMANAS, SOCIAIS APLICADAS E LETRAS \par }
 }
 
 \newcommand{\colorsection}[2]{%
-  \colorbox{white}{\parbox{\dimexpr\textwidth-2\fboxsep}{\color{black}\MakeUppercase{ #1~.~#2}}}}
+\ifcase#1
+  \colorbox{white}{\parbox{\dimexpr\textwidth-2\fboxsep}{\color{black}\MakeUppercase{#2}}}
+\else
+  \colorbox{white}{\parbox{\dimexpr\textwidth-2\fboxsep}{\color{black}\MakeUppercase{ #1~.~#2}}}
+ \fi}
 \renewcommand{\thechapter}{\arabic{chapter}}
 \titleformat{\chapter}		
   {\bf}
