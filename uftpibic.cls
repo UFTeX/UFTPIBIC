@@ -32,6 +32,7 @@
 \definecolor{verde}{RGB}{000,133,119}
 \definecolor{amarelo}{RGB}{253,185,019}
 \definecolor{cinza}{RGB}{102,102,102}
+\definecolor{cinza2018}{RGB}{205,205,205}
 \definecolor{preto}{RGB}{0,0,0}
 \definecolor{branco}{RGB}{255,255,255}
 \definecolor{cortexto}{RGB}{255,255,255}
@@ -512,6 +513,11 @@ CIÊNCIAS HUMANAS, SOCIAIS APLICADAS E LETRAS \par }
 
 \DeclareOption{consepe}{
    \colorlet{cor}{verde}
+}
+
+\DeclareOption{cor2018}{
+   \colorlet{cor}{cinza2018}
+   \colorlet{cortexto}{preto}
 }
 
 \DeclareOption{geral}{
