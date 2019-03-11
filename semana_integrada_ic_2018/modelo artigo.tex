@@ -28,14 +28,13 @@ Orientador do Curso de Ciência da Computação; Campus de Palmas; e-mail: \\tia
  \keyword{Sistemas Embarcados}
  \keyword{Transporte Urbano}
  \keyword{Rastreamento}
- \keyword{Sistemas Embarcados}
 
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-Devido ao grande crescimento urbano, é indispensável que seja repensado o planejamento das cidades e em sua mobilidade. Assim, esse trabalho propõe a construção de um protótipo para coleta de dados sobre as rotas dos veículos de transporte coletivo urbano. Os estudos são ainda preliminares, mas se mostra bastante promissor. Com uma grande quantidade de dados sobre o tráfego dos veículos será possível avaliar rotas e modelos e / ou quantidade de veículos disponíveis para dar maior vasão ao fluxo de passageiros do transporte público. O protótipo proposto foi concebido com a plataforma Arduino, módulos de comunicação utilizando o padrão IEEE 802.15.4 e comunicação GPS e GSM. O protótipo proposto neste trabalho representa um dos módulos de coleta de dados, o módulo que fica localizado na estação de embarque e desembarque de passageiros.
+Devido ao grande crescimento urbano, é indispensável que seja repensado o planejamento das cidades e em sua mobilidade. Assim, esse trabalho propõe a construção de um protótipo para coleta de dados sobre as rotas dos veículos de transporte coletivo urbano. Com uma grande quantidade de dados sobre o tráfego dos veículos será possível avaliar rotas e modelos e / ou quantidade de veículos disponíveis para dar maior vasão ao fluxo de passageiros do transporte público. O protótipo proposto foi concebido com a plataforma Arduino, módulos de comunicação utilizando o padrão IEEE 802.15.4 e comunicação GPS e GSM. Devido à natureza do problema, o projeto é divido em três módulos distintos: servidor web para coleta de dados, módulo no veículo para coleta de dados sobre a localização e tempo de viagem e módulo na estação para sincronismo e redundância da coleta de dados. O protótipo proposto neste trabalho representa um dos módulos de coleta de dados, o módulo que fica localizado na estação de embarque e desembarque de passageiros. Os testes realizados mostraram que a proposta é promissora e viável.
 \end{abstract}
 
 \chapter{Introdução}\vskip -12pt
@@ -46,23 +45,26 @@ Devido ao grande crescimento urbano, é indispensável que seja repensado o plan
 
 De modo geral, o transporte público no Brasil é tido como ineficiente. Grande parte do descontentamento se dá pela má alocação da frota, que resulta em ônibus frequentemente lotados ou tempo excessivos de espera em terminais. Em cidades maiores, a dificuldade de se locomover piora com a intensidade do trânsito e, deste modo, a otimização operacional se torna necessária.
 
-Do ano de 2015 para 2016, o tempo médio que o cidadão perde no trânsito aumentou 20 minutos na cidade de São Paulo - SP \cite{veja_tempo_sp}. Entre os usuários de transporte público, a quantidade em horas gastas com deslocamento todos os dias é de 3 horas e 11 minutos.
+Do ano de 2015 para 2016, o tempo médio que o cidadão perde no trânsito aumentou 20 minutos na cidade de São Paulo - SP \cite{veja_tempo_sp}. Entre os usuários de transporte público, a quantidade em horas gastas com deslocamento todos os dias é de 3 horas e 11 minutos em média.
 
-%Uma das maneiras de melhorar a eficiência do nosso sistema é através da tecnologia. É preciso repensar a questão da mobilidade urbana. Deste modo, com o auxílio de dispositivos eletrônicos é possível oferecer ferramentas de auxílio imediato e também colher informações para serem usadas como base para planejamentos em longo prazo.
+Uma das maneiras de melhorar a eficiência do nosso sistema é através da tecnologia. É preciso repensar a questão da mobilidade urbana. Com o auxílio de dispositivos eletrônicos é possível oferecer ferramentas de auxílio imediato e também colher informações para serem usadas como base para planejamentos em longo prazo.
 
-Assim, o objeto desse projeto é desenvolver uma solução baseada em IoT para gerenciamento de frota urbana, especificamente em transporte coletivo. Nosso objetivo é desenvolver um sistema de rastreamento e controle individual de cada veículo, com geolocalização, alimentar uma aplicação web com esses dados e também fornecer informações em tempo real aos usuários. 
+Assim, o objeto desse projeto é desenvolver uma solução baseada em IoT ({\it Internet of Things}) para gerenciamento de frota urbana, especificamente em transporte público coletivo. Nosso objetivo é desenvolver um sistema de rastreamento e controle individual de cada veículo, com geolocalização, alimentar uma aplicação web com esses dados e também fornecer informações em tempo real aos usuários. 
 
 Os dados capturados dos veículos podem ser utilizados para tomada de decisão em relação a melhores rotas, gastos globais com o transporte, etc.. Um grande desafio, e foco do projeto, é a melhor tecnologia de troca de dados entre veículos e a aplicação Web, devido ao custo de equipamentos mais seguros e rápidos e a baixa qualidade da infraestrutura existente. Portanto, nossos esforços empenham-se no sistema de coleta e gestão de dados da frota veicular.
 
-Destacamos ainda, que esse é um estudo preliminar sobre a melhor alternativa de construção do protótipo para coleta de dados. Dois módulos distintos são necessários: um módulo no veículo para sua geolocalização e um módulo na estação. Esse trabalho tem o foco no módulo da estação. %A Seção \ref{sec:metod} aborda as tecnologias cadidatas e estudadas para confecção dos módulos e o protótipo desenvolvido até o momento.
+Destacamos ainda, que esse é um estudo preliminar sobre a melhor alternativa de construção do protótipo para coleta de dados. Dois módulos distintos são necessários: um módulo no veículo para sua geolocalização e um módulo na estação. Esse trabalho tem o foco no módulo da estação.
+
+Como trabalhos relacionados a mesma problemática e que também se baseiam em IoT, podemos citar \cite{Sharif2018}, \cite{Moore2016}, \cite{Ghazal2016}, \cite{Kodire2016}, \cite{Ibrahim2017}, \cite{Mohammed2017} e \cite{Ibraheem2018}.
+ %A Seção \ref{sec:metod} aborda as tecnologias cadidatas e estudadas para confecção dos módulos e o protótipo desenvolvido até o momento.
 
 \chapter{Materiais e Métodos}\vskip -12pt
 
-A procura por tecnologias que buscam interligar pontos de acesso de comunicação se tornaram imprescindíveis nos dias atuais. Assim, é necessário um estudo sobre quais tecnologias estão disponíveis para estas operações de comunicação. De acordo com o IEEE, a comunicação sem fio está subdividida nos seguintes protocolos de comunicação: IEEE 802.11 - LAN sem fio ({\it Wireless LAN}), IEEE 802.15 - Wireless Personal Area Network ({\it Bluetooth}), IEEE 802.16 - {\it Broadband Wireless Access} (WiMAX) e IEEE 802.20 - {\it Mobile Broadband Wireless Access} (MobileFi) \cite{marcos}.
+A procura por tecnologias que buscam interligar pontos de acesso de comunicação se tornaram imprescindíveis nos dias atuais. Assim, é necessário um estudo sobre quais tecnologias estão disponíveis para estas operações de comunicação. De acordo com o IEEE (\textit{Institute of Electrical and Electronics Engineers}), a comunicação sem fio está subdividida nos seguintes protocolos de comunicação: IEEE 802.11 - LAN sem fio ({\it Wireless LAN}), IEEE 802.15 - Wireless Personal Area Network ({\it Bluetooth}), IEEE 802.16 - {\it Broadband Wireless Access} (WiMAX) e IEEE 802.20 - {\it Mobile Broadband Wireless Access} (MobileFi) \cite{marcos}.
 
-Inicialmente a rede deve ser configurada pelo dispositivo coordenador PAN ({\it Personal Area Network}) e os dispositivos deve associar-se com o PAN. Existem vários parâmetros importantes que são inicializados e armazenados no coordenador do PAN. Alguns são definidos em: comprimento do endereço (curto ou longo), capacidade de segurança e tipo de rede. Uma vez concluído o processo de inicialização, o coordenador PAN entra em modo de espera para receber pedidos de associação \cite{marcos}.
+Para o desenvolvimento desse protótipo foi escolhido o protocolo IEEE 802.15.4, também conhecido como ``ZigBee’’, ou pelos módulo comerciais como ``XBee’’. Ao longo do texto utilizaremos a terminologia XBee.
 
-%Em uma rede sem semáforos\footnote{O termo semáforo refere-se à um algoritmo de controle para entrada de novos dispositivos a rede de modo a evitar que conflitos de entrada entre dispositivos distintos aconteçam.}, um dispositivo que pretenda se associar, primeiro realiza uma busca de detecção de energia no canal. Se o canal estiver ocioso, o dispositivo emite um sinal de solicitação que, simplesmente, verificar se existe um PAN em ação. O coordenador, em seguida, responde com um aviso que incluem muitos parâmetros. Se os parâmetros são compatíveis, o dispositivo envia uma solicitação de associação, que reconhece o coordenador. O dispositivo, em seguida, envia uma solicitação de dados, que é também checada pelo Coordenador. Se o Coordenador aprova, transmite uma associação de resposta, que é reconhecida pelo aparelho. Uma vez que a associação é confirmada pela resposta do MAC, o dispositivo e o coordenador podem iniciar transferências de dados \cite{marcos}.
+%Inicialmente a rede XBee deve ser configurada pelo dispositivo coordenador PAN ({\it Personal Area Network}) e os dispositivos deve associar-se com o PAN. Existem vários parâmetros importantes que são inicializados e armazenados no coordenador do PAN. Alguns são definidos em: comprimento do endereço (curto ou longo), capacidade de segurança e tipo de rede. Uma vez concluído o processo de inicialização, o coordenador PAN entra em modo de espera para receber pedidos de associação \cite{marcos,xbee}.
 
 %Um dado PAN pode ser configurado como um sinal de rede ativado ou como não ativado. Em um sinal de rede ativado, {\it frames} são utilizados para sincronizar dispositivos, identificar o coordenador PAN e estabelecer a necessária superestrutura dentro de uma rede. Esta estrutura ilustra a comunicação do arranjo global de muitos nós da rede, com o tempo de conclusão de cada mensagem (e os avisos opcionais associados). Uma vez que o superframe está dividido em sinais, o superframe inicia com um {\it beacon} (sinal) e é seguido de 16 intervalos (0-15) de tempos iguais, determinando assim o tempo do super {\it frame} \cite{marcos}.
 %
@@ -89,43 +91,7 @@ Inicialmente a rede deve ser configurada pelo dispositivo coordenador PAN ({\it 
 
 O projeto Arduino é uma plataforma de hardware e software que facilita desenvolvimento de aplicações que utilizam microcontroladores. O Arduino foi criado com o objetivo de facilitar o aprendizado e possibilitar a prototipação e desenvolvimento de projetos com um custo relativamente baixo, além de não exigir um vasto conhecimento em eletrônica. Estes foram sem dúvida os fatores primordiais para a popularização do Arduino em âmbito mundial, não somente entre os desenvolvedores mais experientes, mas também entre os entusiastas e iniciantes \cite{marcos}.
 
-%Várias pessoas contribuem com a plataforma, seja na construção de novo hardware ou na confecção de novas bibliotecas e materiais de apoio. O Arduino é uma placa muito eficiente e com recursos necessários para a automação de processos de controle e monitoração. Para o desenvolvimento é utilizado o modelo Arduino Uno R3, que é comumente utilizado em projetos básicos. Existem placas ({\it shields}) voltadas para cada tipo de projeto, permitindo controlar um maior número de dispositivos eletrônicos.
-
-%\begin{figure}[!h]
-%\centering
-%\includegraphics[width=15cm]{arduino.png}
-%\caption{Diagram esquemático do módulo Arduino.}
-%\label{fig:arduino}
-%\end{figure}
-%
-%O Arduino da Figura \ref{fig:arduino} possui algumas características como:
-%
-%\begin{itemize}
-%\item Microprocessador (responsável pelos cálculos e tomada de decisão);
-%\item Memória RAM (utilizada para guardar dados e instruções, volátil);
-%\item Memória flash (utilizada para guardar o sotware, não volátil);
-%\item Temporizadores (timers);
-%\item Contadores;
-%\item Clock do sistema.
-%\end{itemize}
-
-Muitos microcontroladores possuem memória reduzida e menor poder de processamento, característica da maioria dos sistemas embarcados. O Arduino Uno R3, por exemplo, possui as seguintes especificações:
-
-\begin{itemize}
-\item Microcontrolador: ATmega328;
-\item Portas Digitais: 14;
-\item Portas Analógicas: 6;
-\item Memória Flash: 32KB (0.5KB usado no bootloader);
-\item SRAM: 2KB;
-\item EEPROM: 1KB;
-\item Velocidade do Clock: 16MHz.
-\end{itemize}
-
-%O circuito interno do Arduino é alimentado com uma tensão contínua de 5V, isto quando é conectado a uma porta USB do computador. Esta conexão fornece a alimentação e também a comunicação de dados. Caso seja necessário é possível utilizar uma fonte de alimentação externa, que forneça uma saída dentre 7,5 V e 12 V com corrente contínua, ou pode ser ligada diretamente na placa utilizando os pinos Vin e GND \cite{marcos}.
-
-
-%Para o desenvolvimento do projeto foi utilizada plataforma microcontrolada explicada na Seção \ref{aduino}. 
-Existem plataformas com diversos objetivos, tais como: placas de comunicação sem fio, sensor de proximidade, emissor de sinal infravermelho, módulo de geolocalização, leitor de cartão por radiofrequência etc.\cite{Hintz:1992:MAP:573880}. Cada um desses módulos tem sua maneira própria de funcionamento e é necessário testar e estudar cada um de maneira individual para melhor fazer uso de suas características.
+Muitos microcontroladores possuem memória reduzida e menor poder de processamento, característica da maioria dos sistemas embarcados. O Arduino Uno R3, por exemplo, possui as seguintes especificações: Microcontrolador: ATmega328; Portas Digitais: 14; Portas Analógicas: 6; Memória Flash: 32KB (0.5KB usado no {\it bootloader}); SRAM: 2KB; EEPROM: 1KB e Velocidade do Clock: 16MHz.
 
 \begin{figure}[!h]
 \centering
@@ -134,15 +100,7 @@ Existem plataformas com diversos objetivos, tais como: placas de comunicação s
 \label{fig:modulo_estacao}
 \end{figure}
 
-A Figura \ref{fig:modulo_estacao} representa o funcionamento do módulo da estação. O módulo da estação é composto por sub-módulos de:
-
-\begin{itemize}
-\item comunicação sem fio xBee \cite{xbee}, que recebe as informações enviadas pelo módulo do veículo;
-\item comunicação por rede sem fio de telefonia, que envia os dados colhidos até o servidor;
-\item alimentação por energia solar, que abastece o sistema;
-\item armazenamento, que grava temporariamente as informações em um cartão microSD;
-\item controle geral (microcontrolador), que é responsável por controlar os sub-módulos citados anteriormente.
-\end{itemize}
+A Figura \ref{fig:modulo_estacao} representa o funcionamento do módulo da estação. O módulo da estação é composto por sub-módulos de: 1) comunicação sem fio xBee \cite{xbee}, que recebe as informações enviadas pelo módulo do veículo; 2) comunicação por rede sem fio de telefonia, que envia os dados colhidos até o servidor; 3) alimentação por energia solar, que abastece o sistema; 4) armazenamento, que grava temporariamente as informações em um cartão microSD; 5) controle geral (microcontrolador), que é responsável por controlar os sub-módulos citados anteriormente.
 
 Desse modo, toda vez que um veículo passa pela estação, o módulo recebe as informações do veículo, armazena temporariamente em um cartão microSD e envia através na rede móvel de telefonia para o servidor.
 

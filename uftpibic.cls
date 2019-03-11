@@ -32,14 +32,14 @@
 \definecolor{verde}{RGB}{000,133,119}
 \definecolor{amarelo}{RGB}{253,185,019}
 \definecolor{cinza}{RGB}{102,102,102}
-\definecolor{cinza2018}{RGB}{205,205,205}
+\definecolor{cinza2}{RGB}{211,211,211}
 \definecolor{preto}{RGB}{0,0,0}
 \definecolor{branco}{RGB}{255,255,255}
 \definecolor{cortexto}{RGB}{255,255,255}
 \definecolor{cor}{RGB}{102,102,102}
 
 % --------------- Margens
-\RequirePackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=2cm]{geometry} 
+\RequirePackage[a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm]{geometry} 
 \RequirePackage{pdfpages}
 % --------------- Utilização da marca d'agua
 \RequirePackage{wallpaper}  
@@ -201,11 +201,11 @@
 \noindent
 \begin{minipage}{.8\textwidth}
 \begin{flushright}\renewcommand{\familydefault}{\sfdefault}\normalfont
-UNIVERSIDADE FEDERAL DO {\bf TOCANTINS} \vspace{-.4\baselineskip} \\
-PRÓ-REITORIA DE {\bf PESQUISA E PÓS-GRADUAÇÃO} \vspace{-.4\baselineskip} \\
-COORDENAÇÃO DE  {\bf INICIAÇÃO CIENTÍFICA} \vspace{-.4\baselineskip}\\
+UNIVERSIDADE FEDERAL DO  TOCANTINS \vspace{-.4\baselineskip} \\
+PRÓ-REITORIA DE  PESQUISA E PÓS-GRADUAÇÃO \vspace{-.4\baselineskip} \\
+COORDENAÇÃO DE INICIAÇÃO CIENTÍFICA \vspace{-.4\baselineskip}\\
 \noindent\makebox[\linewidth]{\rule{\textwidth}{.5pt}}\vspace{-.4\baselineskip}
-\small\fontfamily{phv}\fontseries{mc}\selectfont
+\footnotesize\fontfamily{phv}\fontseries{mc}\selectfont
 \local@address\ | \local@cep\ | \local@city /TO \vspace{-.4\baselineskip} \\
 \local@phone\ | www.uft.edu.br | \local@mail 
 \end{flushright}
@@ -281,10 +281,11 @@ COORDENAÇÃO DE  {\bf INICIAÇÃO CIENTÍFICA} \vspace{-.4\baselineskip}\\
 \par \vspace{.75cm}
 
 {\bf GRANDES ÁREAS DO CONHECIMENTO DA UFT: \par \vspace{.75cm}
-CIÊNCIAS AGRÁRIAS \par
-CIÊNCIAS BIOLÓGICAS E DA SAÚDE \par
+%CIÊNCIAS AGRÁRIAS \par
+%CIÊNCIAS BIOLÓGICAS E DA SAÚDE \par
 CIÊNCIAS EXATAS E DA TERRA \par
-CIÊNCIAS HUMANAS, SOCIAIS APLICADAS E LETRAS \par } 
+%CIÊNCIAS HUMANAS, SOCIAIS APLICADAS E LETRAS \par 
+} 
 
 \renewcommand{\baselinestretch}{1.5}
 }
@@ -439,10 +440,11 @@ PROGRAMA INSTITUCIONAL DE BOLSAS DE INICIAÇÃO CIENT\'IFICA -- \local@projectty
 \MakeUppercase{\bf nome do grupo de pesquisa}: \local@grupo \par \vspace{.75cm}
 
 {\bf GRANDES ÁREAS DO CONHECIMENTO DA UFT: \par \vspace{.75cm}
-CIÊNCIAS AGRÁRIAS \par
-CIÊNCIAS BIOLÓGICAS E DA SAÚDE \par
+%CIÊNCIAS AGRÁRIAS \par
+%CIÊNCIAS BIOLÓGICAS E DA SAÚDE \par
 CIÊNCIAS EXATAS E DA TERRA \par
-CIÊNCIAS HUMANAS, SOCIAIS APLICADAS E LETRAS \par } 
+%CIÊNCIAS HUMANAS, SOCIAIS APLICADAS E LETRAS \par 
+} 
 
 \renewcommand{\baselinestretch}{1.5}
 }
@@ -515,13 +517,13 @@ CIÊNCIAS HUMANAS, SOCIAIS APLICADAS E LETRAS \par }
    \colorlet{cor}{verde}
 }
 
-\DeclareOption{cor2018}{
-   \colorlet{cor}{cinza2018}
+\DeclareOption{geral}{
+   \colorlet{cor}{amarelo}
    \colorlet{cortexto}{preto}
 }
 
-\DeclareOption{geral}{
-   \colorlet{cor}{amarelo}
+\DeclareOption{2019}{
+   \colorlet{cor}{cinza2}
    \colorlet{cortexto}{preto}
 }
 
