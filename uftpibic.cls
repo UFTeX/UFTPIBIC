@@ -1,8 +1,8 @@
 \def\filename{uftpibic.dtx}
-\def\fileversion{v2.0.0}
-\def\filedate{2018/20/03}
+\def\fileversion{v2.0.1}
+\def\filedate{2020/03/03}
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass {uftpibic} [\filedate\ \fileversion\ Classe personalizada para documentos da UFT]
+\ProvidesClass {uftpibic} %[\filedate\ \fileversion\ Classe personalizada para documentos da UFT]
 
 \def\@@ptsize{12pt}
 \DeclareOption{10pt}{\def\@@ptsize{10pt}}
@@ -358,9 +358,11 @@ CIÊNCIAS EXATAS E DA TERRA \par
   \let\@oddhead\@empty
   \def\@oddfoot{%
     \reset@font
+    \includegraphics[scale=.1]{simbolouft}
     \hfil
     Página~\thepage~de~\pageref{LastPage}
     \hfil % removed for aligning to the right
+    \includegraphics[scale=.3]{cnpq}
   }%
   \let\@evenhead\@empty
   \let\@evenfoot\@oddfoot
@@ -368,7 +370,7 @@ CIÊNCIAS EXATAS E DA TERRA \par
 
 \renewcommand\maketitle{
 \newpage
-\thispagestyle{empty}
+\thispagestyle{plain}
 \noindent
 \begin{minipage}{.8\textwidth}
 \begin{flushright}\renewcommand{\familydefault}{\sfdefault}\normalfont
@@ -402,11 +404,11 @@ PROGRAMA INSTITUCIONAL DE BOLSAS DE INICIAÇÃO CIENT\'IFICA -- \local@projectty
     %\toks@={}
     \@whilenum \count1<\@advisor \do{%
     \ifcase\count1 % same as \ifnum0=\count1
-       \MakeUppercase{\bf\local@advisorstring}: \csname uftAdvisorDegree:\the\count1 \endcsname \ 
+       \MakeUppercase{\bf\local@advisorstring\ do projeto}: \csname uftAdvisorDegree:\the\count1 \endcsname \ 
         \csname uftAdvisorName:\the\count1 \endcsname \ 
         \csname uftAdvisorSurname:\the\count1 \endcsname \ \par
     \else
-        \MakeUppercase{\bf\local@coadvisorstring}: \csname uftAdvisorDegree:\the\count1 \endcsname \ 
+        \MakeUppercase{\bf\local@coadvisorstring\ do projeto}: \csname uftAdvisorDegree:\the\count1 \endcsname \ 
         \csname uftAdvisorName:\the\count1 \endcsname \ 
         \csname uftAdvisorSurname:\the\count1 \endcsname \ \par
     \fi
@@ -416,6 +418,7 @@ PROGRAMA INSTITUCIONAL DE BOLSAS DE INICIAÇÃO CIENT\'IFICA -- \local@projectty
 \MakeUppercase{\bf campus}: \local@campus \par
 \MakeUppercase{\bf curso}: \local@department \par
 \MakeUppercase{\bf local de execução}: \local@local\par
+\MakeUppercase{\bf programa}: \par
 \MakeUppercase{\bf Data de início}: \local@datainicio \par
 \MakeUppercase{\bf Data de conclusão}: \local@dataconclusao \par
 
@@ -439,12 +442,12 @@ PROGRAMA INSTITUCIONAL DE BOLSAS DE INICIAÇÃO CIENT\'IFICA -- \local@projectty
 {\bf ÁREA DO CONHECIMENTO (CNPq)}: \local@area \par
 \MakeUppercase{\bf nome do grupo de pesquisa}: \local@grupo \par \vspace{.75cm}
 
-{\bf GRANDES ÁREAS DO CONHECIMENTO DA UFT: \par \vspace{.75cm}
+%{\bf GRANDES ÁREAS DO CONHECIMENTO DA UFT: \par \vspace{.75cm}
 %CIÊNCIAS AGRÁRIAS \par
 %CIÊNCIAS BIOLÓGICAS E DA SAÚDE \par
-CIÊNCIAS EXATAS E DA TERRA \par
+%CIÊNCIAS EXATAS E DA TERRA \par
 %CIÊNCIAS HUMANAS, SOCIAIS APLICADAS E LETRAS \par 
-} 
+%} 
 
 \renewcommand{\baselinestretch}{1.5}
 }
