@@ -222,7 +222,7 @@ COORDENAÇÃO DE INICIAÇÃO CIENTÍFICA \vspace{-.4\baselineskip}\\
 \end{minipage}% This must go next to `\end{minipage}`
 \begin{minipage}{.225\textwidth}
 \centering
-\includegraphics[scale=.4]{logouft}
+\includegraphics[scale=.4]{logos/logouft}
 \end{minipage}
  
  \renewcommand{\baselinestretch}{1}
