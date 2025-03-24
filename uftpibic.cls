@@ -2,7 +2,7 @@
 \def\fileversion{v2.0.0}
 \def\filedate{2018/20/03}
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass {uftpibic} [\filedate\ \fileversion\ Classe personalizada para documentos da UFT]
+\ProvidesClass {uftpibic} [\filedate\ \fileversion\ Classe personalizada para projetos de pesquisa PIBIC e PIVIC da UFT]
 
 \def\@@ptsize{12pt}
 \DeclareOption{10pt}{\def\@@ptsize{10pt}}
@@ -39,7 +39,7 @@
 \definecolor{cor}{RGB}{102,102,102}
 
 % --------------- Margens
-\RequirePackage[a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm]{geometry} 
+\RequirePackage[a4paper,top=5cm,bottom=2cm,left=2cm,right=2cm,headsep=3.2cm]{geometry} 
 \RequirePackage{pdfpages}
 % --------------- Utilização da marca d'agua
 \RequirePackage{wallpaper}  
@@ -57,7 +57,7 @@
 \RequirePackage[labelfont=bf,textfont=bf,labelsep=endash, singlelinecheck=false,justification=centering]{caption}
 %\RequirePackage{newtxmath,newtxtext}
 % --------------- Links em preto
-\RequirePackage[pdftex,unicode=true,plainpages=false,pdfpagelabels,pagebackref,colorlinks=true,citecolor=black,linkcolor=black,urlcolor=black,filecolor=black,bookmarksopen=true]{hyperref}
+\RequirePackage[pdftex,unicode=true,plainpages=false,pdfpagelabels,pagebackref,colorlinks=true,citecolor=black,linkcolor=black,urlcolor=blue,filecolor=black,bookmarksopen=true]{hyperref}
 % --------------- soluciona o problema com o hyperref e capitulos
 \RequirePackage[all]{hypcap}
 \RequirePackage[nottoc,numbib]{tocbibind}
@@ -205,54 +205,45 @@
   \fi
 }
 
+
+
 \renewcommand\maketitle{
 \newpage
-\thispagestyle{empty}
-\noindent
-\begin{minipage}{.8\textwidth}
-\begin{flushright}\renewcommand{\familydefault}{\sfdefault}\normalfont
-UNIVERSIDADE FEDERAL DO  TOCANTINS \vspace{-.4\baselineskip} \\
-PRÓ-REITORIA DE  PESQUISA E PÓS-GRADUAÇÃO \vspace{-.4\baselineskip} \\
-COORDENAÇÃO DE INICIAÇÃO CIENTÍFICA \vspace{-.4\baselineskip}\\
-\noindent\makebox[\linewidth]{\rule{\textwidth}{.5pt}}\vspace{-.4\baselineskip}
-\footnotesize\fontfamily{phv}\fontseries{mc}\selectfont
-\local@address\ | \local@cep\ | \local@city /TO \vspace{-.4\baselineskip} \\
-\local@phone\ | www.uft.edu.br | \local@mail 
-\end{flushright}
-\end{minipage}% This must go next to `\end{minipage}`
-\begin{minipage}{.225\textwidth}
-\centering
-\includegraphics[scale=.4]{logos/logouft}
-\end{minipage}
+\pagestyle{plain}
+
+
  
- \renewcommand{\baselinestretch}{1}
+\setstretch{1}
 \begin{center}
-\mybox{\MakeUppercase{\bf\local@title}} \vspace{.25cm}
+\mybox{\MakeUppercase{\bf\local@title}} %\vspace{.25cm}
 \end{center}
+
+{\bf Nome do Aluno}: \@authname\ \@authsurn \par
+{\bf Curso}: \local@department \par
 
 \nohyphens{%
     \count1=0
     %\toks@={}
     \@whilenum \count1<\@advisor \do{%
     \ifcase\count1 % same as \ifnum0=\count1
-       \MakeUppercase{\bf\local@advisorstring}: \csname uftAdvisorDegree:\the\count1 \endcsname \ 
+       {\bf\local@advisorstring}: \csname uftAdvisorDegree:\the\count1 \endcsname \ 
         \csname uftAdvisorName:\the\count1 \endcsname \ 
         \csname uftAdvisorSurname:\the\count1 \endcsname \ \par
     \else
-        \MakeUppercase{\bf\local@coadvisorstring}: \csname uftAdvisorDegree:\the\count1 \endcsname \ 
+        {\bf\local@coadvisorstring}: \csname uftAdvisorDegree:\the\count1 \endcsname \ 
         \csname uftAdvisorName:\the\count1 \endcsname \ 
         \csname uftAdvisorSurname:\the\count1 \endcsname \ \par
     \fi
     \advance\count1 by 1} \par
 }
-\MakeUppercase{\bf Nome do Aluno}: \@authname\ \@authsurn \par
-\MakeUppercase{\bf campus}: \local@campus \par
-\MakeUppercase{\bf curso}: \local@department \par
-\MakeUppercase{\bf local de execução}: \local@local\par
-\MakeUppercase{\bf grande área do conhecimento}: \local@area \par \vspace{.75cm}
-\MakeUppercase{\bf fontes de financiamento}: \local@financiamento \par
-\MakeUppercase{\bf nome do grupo de pesquisa}: \local@grupo \par
-\MakeUppercase{\bf palavras-chave}: \count1=0 \count2=1
+
+
+%{\bf campus}: \local@campus \par
+%\MakeUppercase{\bf local de execução}: \local@local\par
+%\MakeUppercase{\bf grande área do conhecimento}: \local@area \par \vspace{.75cm}
+%\MakeUppercase{\bf fontes de financiamento}: \local@financiamento \par
+%\MakeUppercase{\bf nome do grupo de pesquisa}: \local@grupo \par
+{\bf Palavras-chave}: \count1=0 \count2=1
 \@whilenum \count1<\value{keywords} \do {%
     \ifnum\count2=\value{keywords}
         \csname uftKeyword:\the\count1 \endcsname.
@@ -261,50 +252,50 @@ COORDENAÇÃO DE INICIAÇÃO CIENTÍFICA \vspace{-.4\baselineskip}\\
     \fi
         \advance\count1 by 1
         \advance\count2 by 1}\par
-\MakeUppercase{\bf equipe executora}: \par
+% \MakeUppercase{\bf equipe executora}: \par
 
-\def\xyz{\par}
-\begin{tabularx}{16cm}[b]{p{11cm}p{5cm}}
-\hline{\bf Nome} & {\bf Categoria} \\ \hline
-\toks@={}
-\count1=0 
-\@whilenum \count1<\value{equipe} \do {%
-\ifcase\count1 % same as \ifnum0=\count1
-          \toks@=\expandafter{\csname uftNome:\the\count1%
-          \expandafter\endcsname\expandafter\space%
-          \expandafter&\expandafter\space
-          \csname uftCategoria:\the\count1\endcsname\\}
-        \else
-          \toks@=\expandafter\expandafter\expandafter{%
-            \expandafter\the\expandafter\toks@
-            %\expandafter&\expandafter\space
-            \csname uftNome:\the\count1\expandafter\endcsname%
-            \expandafter&\expandafter\space
-            \expandafter\space\csname uftCategoria:\the\count1\endcsname\\
-          }%
-        \fi
-        \advance\count1 by 1}
-\the\toks@
-\hline
-\end{tabularx}
+% \def\xyz{\par}
+% \begin{tabularx}{16cm}[b]{p{11cm}p{5cm}}
+% \hline{\bf Nome} & {\bf Categoria} \\ \hline
+% \toks@={}
+% \count1=0 
+% \@whilenum \count1<\value{equipe} \do {%
+% \ifcase\count1 % same as \ifnum0=\count1
+%           \toks@=\expandafter{\csname uftNome:\the\count1%
+%           \expandafter\endcsname\expandafter\space%
+%           \expandafter&\expandafter\space
+%           \csname uftCategoria:\the\count1\endcsname\\}
+%         \else
+%           \toks@=\expandafter\expandafter\expandafter{%
+%             \expandafter\the\expandafter\toks@
+%             %\expandafter&\expandafter\space
+%             \csname uftNome:\the\count1\expandafter\endcsname%
+%             \expandafter&\expandafter\space
+%             \expandafter\space\csname uftCategoria:\the\count1\endcsname\\
+%           }%
+%         \fi
+%         \advance\count1 by 1}
+% \the\toks@
+% \hline
+% \end{tabularx}
 
-\par \vspace{.75cm}
+% \par \vspace{.75cm}
 
-{\bf GRANDES ÁREAS DO CONHECIMENTO DA UFT: \par \vspace{.75cm}
-%CIÊNCIAS AGRÁRIAS \par
-%CIÊNCIAS BIOLÓGICAS E DA SAÚDE \par
-CIÊNCIAS EXATAS E DA TERRA \par
-%CIÊNCIAS HUMANAS, SOCIAIS APLICADAS E LETRAS \par 
-} 
+% {\bf GRANDES ÁREAS DO CONHECIMENTO DA UFT: \par \vspace{.75cm}
+% %CIÊNCIAS AGRÁRIAS \par
+% %CIÊNCIAS BIOLÓGICAS E DA SAÚDE \par
+% CIÊNCIAS EXATAS E DA TERRA \par
+% %CIÊNCIAS HUMANAS, SOCIAIS APLICADAS E LETRAS \par 
+% } 
 
-\renewcommand{\baselinestretch}{1.5}
+\setstretch{1.5}
 }
 
 \newcommand{\colorsection}[2]{%
 \ifcase#1
-  \colorbox{white}{\parbox{\dimexpr\textwidth-2\fboxsep}{\color{black}\MakeUppercase{#2}}}
+  \colorbox{azul}{\parbox{\dimexpr\textwidth-2\fboxsep}{\color{white}\MakeUppercase{#2}}}
 \else
-  \colorbox{white}{\parbox{\dimexpr\textwidth-2\fboxsep}{\color{black}\MakeUppercase{ #1~--~#2}}}
+  \colorbox{azul}{\parbox{\dimexpr\textwidth-2\fboxsep}{\color{white}\centering\MakeUppercase{#2}}}
  \fi}
 \renewcommand{\thechapter}{\arabic{chapter}}
 \titleformat{\chapter}		
@@ -327,7 +318,29 @@ CIÊNCIAS EXATAS E DA TERRA \par
 
 
 \renewpagestyle{plain}{%
+\sethead{}{
+\noindent
+\begin{minipage}{.85\textwidth}
+\begin{minipage}{.1\textwidth}
+\includegraphics[scale=.2]{logos/Caninde}\vspace{-2cm}
+\end{minipage}
+\begin{flushright}\renewcommand{\familydefault}{\sfdefault}\normalfont
+UNIVERSIDADE FEDERAL DO {\bf TOCANTINS} \vspace{-.4\baselineskip} \\
+PRÓ-REITORIA DE {\bf PESQUISA E PÓS-GRADUAÇÃO} \vspace{-.4\baselineskip} \\
+COORDENAÇÃO DE {\bf INICIAÇÃO CIENTÍFICA} \vspace{-.4\baselineskip}\\
+\noindent\makebox[\linewidth]{\rule{\textwidth}{.5pt}}\vspace{-.4\baselineskip}\\
+\footnotesize\fontfamily{phv}\fontseries{mc}\selectfont
+\local@address\ | \local@cep\ | \local@city /TO \vspace{-.4\baselineskip} \\
+\local@phone\ | www.uft.edu.br | \local@mail 
+\end{flushright}
+\end{minipage}% This must go next to `\end{minipage}`
+\begin{minipage}{.18\textwidth}
+\centering
+\includegraphics[scale=.3]{logos/logouft}
+\end{minipage}
+}{}
   \setfoot{}{}{\thepage}%
+  
 }
 \pagestyle{plain}
 
@@ -535,6 +548,134 @@ CIÊNCIAS EXATAS E DA TERRA \par
 \DeclareOption{2019}{
    \colorlet{cor}{cinza2}
    \colorlet{cortexto}{preto}
+}
+
+\DeclareOption{2024}{
+   \colorlet{cor}{azul}
+   %\colorlet{cortexto}{preto}
+}
+
+\DeclareOption{professor}{
+
+\newgeometry{top=2.5cm,bottom=2.5cm,left=3cm,right=3cm} 
+\renewpagestyle{plain}{%
+\sethead{}{}{}
+\setfoot{}{}{\thepage}
+}
+\renewcommand\maketitle{
+\newpage
+\thispagestyle{empty}
+\noindent
+% \begin{minipage}{.85\textwidth}
+% \begin{minipage}{.1\textwidth}
+% \includegraphics[scale=.2]{logos/Caninde}\vspace{-2cm}
+% \end{minipage}
+% \begin{flushright}\renewcommand{\familydefault}{\sfdefault}\normalfont
+% UNIVERSIDADE FEDERAL DO  TOCANTINS \vspace{-.4\baselineskip} \\
+% PRÓ-REITORIA DE  PESQUISA E PÓS-GRADUAÇÃO \vspace{-.4\baselineskip} \\
+% COORDENAÇÃO DE INICIAÇÃO CIENTÍFICA \vspace{-.4\baselineskip}\\
+% \noindent\makebox[\linewidth]{\rule{\textwidth}{.5pt}}\vspace{-.4\baselineskip}
+% \footnotesize\fontfamily{phv}\fontseries{mc}\selectfont
+% \local@address\ | \local@cep\ | \local@city /TO \vspace{-.4\baselineskip} \\
+% \local@phone\ | www.uft.edu.br | \local@mail 
+% \end{flushright}
+% \end{minipage}% This must go next to `\end{minipage}`
+% \begin{minipage}{.2\textwidth}
+% \centering
+% \includegraphics[scale=.35]{logos/logouft}
+% \end{minipage}
+ 
+\setstretch{1}
+\begin{center}
+\mybox{\MakeUppercase{\bf\local@title}} %\vspace{.25cm}
+\end{center}
+
+\nohyphens{%
+    \count1=0
+    %\toks@={}
+    \@whilenum \count1<\@advisor \do{%
+    \ifcase\count1 % same as \ifnum0=\count1
+       {\bf\local@advisorstring}: \csname uftAdvisorDegree:\the\count1 \endcsname \ 
+        \csname uftAdvisorName:\the\count1 \endcsname \ 
+        \csname uftAdvisorSurname:\the\count1 \endcsname \ \par
+    \else
+        {\bf\local@coadvisorstring}: \csname uftAdvisorDegree:\the\count1 \endcsname \ 
+        \csname uftAdvisorName:\the\count1 \endcsname \ 
+        \csname uftAdvisorSurname:\the\count1 \endcsname \ \par
+    \fi
+    \advance\count1 by 1} \par
+}
+
+{\bf Curso}: \local@department \par
+{\bf Local de execução da Pesquisa}: \local@local\par
+%{\bf Nome do Aluno}: \@authname\ \@authsurn \par
+
+{\bf Participantes do projeto de pesquisa:}
+%\toks@={}
+\count1=0 
+\@whilenum \count1<\value{equipe} \do {%
+\ifcase\count1 % same as \ifnum0=\count1
+          \csname uftNome:\the\count1 \endcsname , \
+        \else
+           \csname uftNome:\the\count1 \endcsname%
+        \fi
+        \advance\count1 by 1}
+%\the\toks@
+
+%{\bf campus}: \local@campus \par
+
+%\MakeUppercase{\bf grande área do conhecimento}: \local@area \par \vspace{.75cm}
+%\MakeUppercase{\bf fontes de financiamento}: \local@financiamento \par
+%\MakeUppercase{\bf nome do grupo de pesquisa}: \local@grupo \par
+{\bf Palavras-chave}: \count1=0 \count2=1
+\@whilenum \count1<\value{keywords} \do {%
+    \ifnum\count2=\value{keywords}
+        \csname uftKeyword:\the\count1 \endcsname.
+    \else
+        \csname uftKeyword:\the\count1 \endcsname,
+    \fi
+        \advance\count1 by 1
+        \advance\count2 by 1}\par
+% \MakeUppercase{\bf equipe executora}: \par
+
+% \def\xyz{\par}
+% \begin{tabularx}{16cm}[b]{p{11cm}p{5cm}}
+% \hline{\bf Nome} & {\bf Categoria} \\ \hline
+% \toks@={}
+% \count1=0 
+% \@whilenum \count1<\value{equipe} \do {%
+% \ifcase\count1 % same as \ifnum0=\count1
+%           \toks@=\expandafter{\csname uftNome:\the\count1%
+%           \expandafter\endcsname\expandafter\space%
+%           \expandafter&\expandafter\space
+%           \csname uftCategoria:\the\count1\endcsname\\}
+%         \else
+%           \toks@=\expandafter\expandafter\expandafter{%
+%             \expandafter\the\expandafter\toks@
+%             %\expandafter&\expandafter\space
+%             \csname uftNome:\the\count1\expandafter\endcsname%
+%             \expandafter&\expandafter\space
+%             \expandafter\space\csname uftCategoria:\the\count1\endcsname\\
+%           }%
+%         \fi
+%         \advance\count1 by 1}
+% \the\toks@
+% \hline
+% \end{tabularx}
+
+% \par \vspace{.75cm}
+
+% {\bf GRANDES ÁREAS DO CONHECIMENTO DA UFT: \par \vspace{.75cm}
+% %CIÊNCIAS AGRÁRIAS \par
+% %CIÊNCIAS BIOLÓGICAS E DA SAÚDE \par
+% CIÊNCIAS EXATAS E DA TERRA \par
+% %CIÊNCIAS HUMANAS, SOCIAIS APLICADAS E LETRAS \par 
+% } 
+
+\renewcommand{\baselinestretch}{1.5}
+\pagestyle{plain}
+}
+
 }
 
 \ProcessOptions\relax

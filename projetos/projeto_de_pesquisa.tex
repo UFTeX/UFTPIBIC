@@ -1,6 +1,6 @@
-\documentclass[12pt,2019]{uftpibic}
+\documentclass[12pt, 2024, professor]{uftpibic}
 
-\usepackage[alf]{abntex2cite}
+\usepackage[alf]{../abntex2/abntex2cite}
 %\renewcommand{\backrefpagesname}{}
 %\renewcommand{\backref}{}
 \renewcommand*{\backrefalt}[4]{}
@@ -11,11 +11,12 @@
 \usepackage{longtable}
 \usepackage{amsmath,amssymb}
 
+%% You can use these commands to check the CNPq option ----------%
 \makeatletter
-\newcommand{\ok}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{0.1em}\color{blue}{$\checkmark\quad$}}}
-\newcommand{\ko}{\makebox[0pt][l]{$\square$}\raisebox{.15ex}{\hspace{0.1em}$\qquad$}}
+\newcommand{\ok}{\makebox[0pt][l]{(\ \ \ )}\raisebox{.15ex}{\hspace{0.1em}\color{blue}{ $\checkmark\quad$}}}
+\newcommand{\ko}{\makebox[0pt][l]{(\ \ \ )}\raisebox{.15ex}{\hspace{0.1em}$\qquad$}}
 \makeatother
-
+%% --------------------------------------------------------------%
 \usepackage[letterspace=-45]{microtype}
 
 \usepackage{amsthm}
@@ -28,7 +29,7 @@
 %-------------------------------------------------------------------------------------------------------------------------%
 % Endereço Institucional
 %-------------------------------------------------------------------------------------------------------------------------%
-\address{109 Norte – Quadra 109 Norte, Av. Ns 15, ALCNO 14, Bl 04, Sala 15, Propesq}
+\address{Quadra 109 Norte, Av. Ns 15, ALCNO 14, Bl 04, Sala 15, Propesq}
 \cep{77001-090}
 \phone{(63) 3229-4037 }
 \mail{propesq@uft.edu.br}
@@ -53,7 +54,7 @@
 \keyword{Aprendizado de Máquina}
 \keyword{Clima Espacial}
 
-\equipeexecutora{\bf Tiago da Silva Almeida}{\bf Coordenador}
+\equipeexecutora{Tiago da Silva Almeida}{Coordenador}
 \equipeexecutora{Caio Henrique Machado}{Aluno}
 %-------------------------------------------------------------------------------------------------------------------------%
 % Para evitar a quebra automática dos Capítulos, descomentar abaixo
@@ -66,64 +67,73 @@
 
 \maketitle
 
-\pagebreak
-\chapter{ENQUADRAMENTO DA PROPOSTA}
+\vspace{1cm}
+\chapter{ENQUADRAMENTO CNP\lowercase{q}}
 
 \onehalfspace
-\textls{Conforme determinação do Conselho Nacional de Desenvolvimento Científico e Tecnológico (CNPq), para ser contemplado com bolsa fomentada pelo conselho, o projeto de pesquisa do orientador deve se enquadrar em uma das opções abaixo. Assinale o enquadramento de sua proposta de projeto de pesquisa:}
+Conforme determinação do Conselho Nacional de Desenvolvimento Científico e Tecnológico (CNPq), para ser contemplado com bolsa fomentada pelo conselho, o projeto de pesquisa do orientador deve se enquadrar em uma das opções abaixo. Assinale o enquadramento de sua proposta de projeto de pesquisa:
 
 \bigbreak
 
-\textls{Opção 1. \ok Apresenta aderência a, no mínimo, uma das \textbf{Áreas de Tecnologias Prioritárias do Ministério da Ciência, Tecnologia, Inovações e Comunicações (MCTIC)}, conforme estabelecido na Portaria MCTIC nº 1.122/2020, com texto alterado pela Portaria MCTIC nº 1.329/2020 (\url{www.mctic.gov.br/mctic/opencms/legislacao/portarias/Portaria_MCTIC_n_1122_de_19032020.html})}
+\ok \textbf{Opção 1}. Apresenta aderência a, no mínimo, uma das Áreas de Tecnologias Prioritárias do Ministério da Ciência, Tecnologia, Inovações e Comunicações (MCTIC), conforme estabelecido na Portaria MCTIC nº 1.122/2020, com texto alterado pela Portaria MCTIC nº 1.329/2020 (\url{www.mctic.gov.br/mctic/opencms/legislacao/portarias/Portaria_MCTIC_n_1122_de_19032020.html})
 
 \bigbreak
 
-\textls{Assinale a (s) área (s) de enquadramento:}
+\textbf{Assinale a (s) área (s) de enquadramento}:
 
 \bigbreak
 
-\textls{\ok  \textbf{Tecnologias Estratégicas}, nos seguintes setores: Espacial; Nuclear; Cibernética; e Segurança Pública e de Fronteira.}
+\ok  Tecnologias Estratégicas, nos seguintes setores: Espacial; Nuclear; Cibernética; e Segurança Pública e de Fronteira.
 
-\textls{\ok \textbf{Tecnologias Habilitadoras}, nos seguintes setores: Inteligência Artificial; Internet das Coisas; Materiais Avançados; Biotecnologia; e Nanotecnologia.}
+\ok Tecnologias Habilitadoras, nos seguintes setores: Inteligência Artificial; Internet das Coisas; Materiais Avançados; Biotecnologia; e Nanotecnologia.
 
-\textls{\ko \textbf{Tecnologias de Produção}, nos seguintes setores: Indústria; Agronegócio; Comunicações; Infraestrutura; e Serviços.}
+\ko Tecnologias de Produção, nos seguintes setores: Indústria; Agronegócio; Comunicações; Infraestrutura; e Serviços.
 
-\textls{\ko \textbf{Tecnologias para o Desenvolvimento Sustentável}, nos seguintes setores: Cidades Inteligentes e Sustentáveis; Energias Renováveis; Bioeconomia; Tratamento e Reciclagem de Resíduos Sólidos; Tratamento de Poluição; Monitoramento, prevenção e recuperação de desastres naturais e ambientais; e Preservação Ambiental.}
+\ko Tecnologias para o Desenvolvimento Sustentável, nos seguintes setores: Cidades Inteligentes e Sustentáveis; Energias Renováveis; Bioeconomia; Tratamento e Reciclagem de Resíduos Sólidos; Tratamento de Poluição; Monitoramento, prevenção e recuperação de desastres naturais e ambientais; e Preservação Ambiental.
 
-\textls{\ko  \textbf{Tecnologias para Qualidade de Vida}, nos seguintes setores: Saúde; Saneamento Básico; Segurança Hídrica; e Tecnologias Assistivas.}
-
-\bigbreak
-
-\textls{Opção 2. \ko \textbf{O projeto de pesquisa é da área básica, humanidades e/ou ciências sociais} e contribui para o desenvolvimento das Áreas de Tecnologias Prioritárias do MCTIC.}
-
-
-\textls{Art. 2º. Parágrafo único: ``São também considerados prioritários, diante de sua característica essencial e transversal, os projetos de pesquisa básica, humanidades e ciências sociais que contribuam para o desenvolvimento das áreas definidas nos incisos I a V do caput''.(Parágrafo único acrescido pela \href{http://www.in.gov.br/en/web/dou/-/portaria-n-1.329-de-27-de-marco-de-2020-250263672}{Portaria MCTIC nº 1.329, de 27.03.2020})}
+\ko Tecnologias para Qualidade de Vida, nos seguintes setores: Saúde; Saneamento Básico; Segurança Hídrica; e Tecnologias Assistivas.
 
 \bigbreak
 
-\textls{Opção 3. \ko \textbf{O projeto de pesquisa é de área básica e/ou fundamental}, em interação com a pós-graduação e grupos ou redes de pesquisa.}
+\ko \textbf{Opção 2}. O projeto de pesquisa é da área básica, humanidades e/ou ciências sociais e contribui para o desenvolvimento das Áreas de Tecnologias Prioritárias do MCTIC.
+
+
+Art. 2º. Parágrafo único: ``São também considerados prioritários, diante de sua característica essencial e transversal, os projetos de pesquisa básica, humanidades e ciências sociais que contribuam para o desenvolvimento das áreas definidas nos incisos I a V do caput''.(Parágrafo único acrescido pela \href{http://www.in.gov.br/en/web/dou/-/portaria-n-1.329-de-27-de-marco-de-2020-250263672}{Portaria MCTIC nº 1.329, de 27.03.2020})
 
 \bigbreak
 
-\textls{\textbf{OBSERVAÇÃO: Somente poderão ser contemplados com cotas fomentadas pelo CNPq (PIBIC/CNPq e PIBIC/AF) - caso sejam indicados para tais cotas, após a pontuação da produtividade do orientador - os projetos que assinalarem uma das opções acima (1 a 3).}}
-
-\textls{\textbf{Para se inscrever na modalidade de bolsa PIBITI, o projeto deve se enquadrar nas opções 1 ou 2.}}
-
-\pagebreak
-\textls{Opção 4. \ko O projeto de pesquisa não se enquadra em nenhuma das opções 1 a 3.}
+\ko \textbf{Opção 3}. O projeto de pesquisa é de área básica e/ou fundamental, em interação com a pós-graduação e grupos ou redes de pesquisa.
 
 \bigbreak
 
-\textls{\textbf{OBSERVAÇÃO: o projeto de pesquisa que se enquadrar na opção 4 será, preferencialmente, contemplado com cotas fomentadas pela UFT (PIBIC/UFT) (mesmo que sejam indicados para cota CNPq, após a pontuação da produtividade do orientador).}}
+\textbf{OBSERVAÇÃO}: Somente poderão ser contemplados com cotas fomentadas pelo CNPq (PIBIC/CNPq e PIBIC/AF) - caso sejam indicados para tais cotas, após a pontuação da produtividade do orientador - os projetos que assinalarem uma das opções acima (1 a 3). Para se inscrever na modalidade de bolsa PIBITI, o projeto deve se enquadrar nas opções 1 ou 2.
 
 \bigbreak
 
-\textls{Justifique o enquadramento assinalado (até 250 palavras):} O presente projeto está presente nas áreas Pprioritárias do Ministério da Ciência, Tecnologia, Inovações e Comunicações (MCTIC), atuando basicamente em dois item: tecnologias estratégicas, já que envolve o estudo para propor soluções sobre o clima espacial, ou seja, para tecnologias com foco aeroespacial, e também em tecnologias habilitadores, pois solução computacional utiliza-se de técnicas de inteligência artificial, no caso, redes neurais artificiais.
+\ko \textbf{Opção 4}. O projeto de pesquisa não se enquadra em nenhuma das opções 1 a 3.
+
+\bigbreak
+
+\textbf{OBSERVAÇÃO}: o projeto de pesquisa que se enquadrar na opção 4 será, preferencialmente, contemplado com cotas fomentadas pela UFT (PIBIC/UFT) (mesmo que sejam indicados para cota CNPq, após a pontuação da produtividade do orientador).
+\bigbreak
+
+\textbf{Justifique o enquadramento na Opção 4 (Preenchimento obrigatório):} 
+
+\noindent\makebox[\linewidth]{\rule{\textwidth}{.5pt}}
+
+\noindent\makebox[\linewidth]{\rule{\textwidth}{.5pt}}
+
+\noindent\makebox[\linewidth]{\rule{\textwidth}{.5pt}}
+
+\noindent\makebox[\linewidth]{\rule{\textwidth}{.5pt}}
+
+\noindent\makebox[\linewidth]{\rule{\textwidth}{.5pt}}
 
 %\onehalfspace
-\pagebreak
+%\pagebreak
+\vspace{2cm}
 \setlength{\parindent}{1.5cm}
-\chapter{Introdução e Justificativa}
+\chapter{Introdução}
 
 A maioria das tempestades solares produzem apenas pequenas perturbações na Terra como pequenas variações momentâneas da alimentação das redes de energia elétrica, interferência na comunicação entre aparelhos eletrônicos, necessidade de novo traçado de rotas para aeronaves, perda de alguns satélites. 
 
