@@ -1,4 +1,4 @@
-\documentclass[12pt,report,2019]{uftpibic}
+\documentclass[12pt,report]{uftpibic}
 
 \usepackage[alf]{abntex2cite}
 %\renewcommand{\backrefpagesname}{}
@@ -11,7 +11,7 @@
 %-------------------------------------------------------------------------------------------------------------------------%
 % Endereço Institucional
 %-------------------------------------------------------------------------------------------------------------------------%
-\address{109 Norte, Av. Ns 15, ALCNO 14, Bl 04, Sala 207}
+\address{Quadra 109 Norte, Av. Ns 15, ALCNO 14, Prédio da Reitoria, Propesq}
 \cep{77001-090}
 \phone{(63) 3232-8037}
 \mail{propesq@uft.edu.br}
@@ -48,14 +48,14 @@
 %-------------------------------------------------------------------------------------------------------------------------%
 % Para evitar a quebra automática dos Capítulos, descomentar abaixo
 %-------------------------------------------------------------------------------------------------------------------------%
-%\makeatletter
-%\patchcmd{\chapter}{\if@openright\cleardoublepage\else\clearpage\fi}{}{}{}
-%\makeatother
+\makeatletter
+\patchcmd{\chapter}{\if@openright\cleardoublepage\else\clearpage\fi}{}{}{}
+\makeatother
 %-------------------------------------------------------------------------------------------------------------------------%
 \begin{document}
 
 \maketitle
-\tableofcontents
+%\tableofcontents
 \setlength{\parindent}{1.5cm}
 
 \chapter{Introdução}
@@ -66,7 +66,7 @@ A aplicabilidade da metodologia IoT é bastante diversa, podendo ser aplicada ta
 
 Os dados capturados dos veículos podem ser utilizados para tomada de decisão em relação a melhores rotas, gastos globais com o transporte, etc.. Um grande desafio, e foco do projeto, é a melhor tecnologia de troca de dados entre veículos e a aplicação Web, devido ao custo de equipamento mais seguros e rápidos e a baixa qualidade da infraestrutura existente. Portanto, nossos esforços empenham-se no sistema de coleta e gestão de dados da frota veicular.
 
-\vspace{1.5cm}
+%\vspace{1.5cm}
 \chapter{Objetivos}
 
 O objetivo desta iniciação científica é desnevolver um módulo veicular para monitoramento do transporte público. Esse módulo é parte do projeto de pesquisa, o qual foi divido essencialmente em três partes partes principais: módulo do veículo, módulo da estação e servidor de aplicação.
@@ -191,18 +191,18 @@ O circuito interno do Arduino é alimentado com uma tensão contínua de 5V, ist
 
 \bibliography{bibliografia}
 
-\newpage
-\begin{center}
-\bf PARECER DO ALUNO A RESPEITO DO PROFESSOR
-\end{center}
+% \newpage
+% \begin{center}
+% \bf PARECER DO ALUNO A RESPEITO DO PROFESSOR
+% \end{center}
 
-O professor mostrou-se extremamente responsável para com suas obrigações quanto orientador. Definiu horários semanais para a pesquisa, marcou reuniões (nas quais esteve presente em todas), demonstrou-se prestativo quanto a atendimento fora do horário destinado para o mesmo, estabeleceu meios de comunicação rápidos e eficientes. Proporcionou reuniões com outros orientadores e orientandos para troca de experiência relativa a iniciação cientifica. Mesmo com problemas de saúde fez-se ativo no projeto, não deixando de cumprir suas responsabilidades.  
+% O professor mostrou-se extremamente responsável para com suas obrigações quanto orientador. Definiu horários semanais para a pesquisa, marcou reuniões (nas quais esteve presente em todas), demonstrou-se prestativo quanto a atendimento fora do horário destinado para o mesmo, estabeleceu meios de comunicação rápidos e eficientes. Proporcionou reuniões com outros orientadores e orientandos para troca de experiência relativa a iniciação cientifica. Mesmo com problemas de saúde fez-se ativo no projeto, não deixando de cumprir suas responsabilidades.  
 
-\begin{center}
-\bf PARECER DO PROFESSOR A RESPEITO DO ALUNO
-\end{center}
+% \begin{center}
+% \bf PARECER DO PROFESSOR A RESPEITO DO ALUNO
+% \end{center}
 
-O discente sempre demonstrou grande habilidade com projetos eletrônicos, assim como muita motivação para execução dos trabalhos. A facilidade de assimilação do conteúdo também são características presentes na personalidade do aluno. Único ponto negativo a ressaltar é dificuldade do discente em gerenciar o tempo das atividades. De um modo geral, os alunos apresentam um comportamento de ``hiper participação'' devido ao grande volume de atividades apresentadas. Infelizmente a grande maioria deles não possui maturidade para gerir o próprio tempo e que acarreta em grande atrasos no desenvolvimento das atividades.
+% O discente sempre demonstrou grande habilidade com projetos eletrônicos, assim como muita motivação para execução dos trabalhos. A facilidade de assimilação do conteúdo também são características presentes na personalidade do aluno. Único ponto negativo a ressaltar é dificuldade do discente em gerenciar o tempo das atividades. De um modo geral, os alunos apresentam um comportamento de ``hiper participação'' devido ao grande volume de atividades apresentadas. Infelizmente a grande maioria deles não possui maturidade para gerir o próprio tempo e que acarreta em grande atrasos no desenvolvimento das atividades.
 
 
 

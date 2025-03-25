@@ -293,9 +293,9 @@
 
 \newcommand{\colorsection}[2]{%
 \ifcase#1
-  \colorbox{azul}{\parbox{\dimexpr\textwidth-2\fboxsep}{\color{white}\MakeUppercase{#2}}}
+  \colorbox{cor}{\parbox{\dimexpr\textwidth-2\fboxsep}{\color{cortexto}\MakeUppercase{#2}}}
 \else
-  \colorbox{azul}{\parbox{\dimexpr\textwidth-2\fboxsep}{\color{white}\centering\MakeUppercase{#2}}}
+  \colorbox{cor}{\parbox{\dimexpr\textwidth-2\fboxsep}{\color{cortexto}\centering\MakeUppercase{#2}}}
  \fi}
 \renewcommand{\thechapter}{\arabic{chapter}}
 \titleformat{\chapter}		
@@ -307,7 +307,7 @@
 
 
 \newcommand{\colorsectionss}[2]{%
-  \colorbox{white}{\parbox{\dimexpr\textwidth-2\fboxsep}{\color{black} #1~--~#2}}}
+  \colorbox{cor}{\parbox{\dimexpr\textwidth-2\fboxsep}{\color{cortexto} #1~--~#2}}}
 %\renewcommand{\thesection}{\arabic{section}}
 \titleformat{\section}[display]
   {\bf}
@@ -375,158 +375,172 @@ COORDENAÇÃO DE {\bf INICIAÇÃO CIENTÍFICA} \vspace{-.4\baselineskip}\\
 
 \DeclareOption{report}{
 
+\newgeometry{top=5cm,bottom=3cm,left=2cm,right=2cm,headsep=3.2cm} 
 
-\renewcommand*{\ps@plain}{%
-  \let\@mkboth\@gobbletwo
-  \let\@oddhead\@empty
-  \def\@oddfoot{%
-    \reset@font
-    \hfil
-    Página~\thepage~de~\pageref{LastPage}
-    \hfil % removed for aligning to the right
-  }%
-  \let\@evenhead\@empty
-  \let\@evenfoot\@oddfoot
-}
+\colorlet{cor}{branco}
+\colorlet{cortexto}{preto}
 
-\renewcommand\maketitle{
-\newpage
-\thispagestyle{empty}
+\renewpagestyle{plain}{%
+\sethead{}{
 \noindent
-\begin{minipage}{.8\textwidth}
+\begin{minipage}{.85\textwidth}
+\begin{minipage}{.1\textwidth}
+\includegraphics[scale=.2]{logos/Caninde}\vspace{-2cm}
+\end{minipage}
 \begin{flushright}\renewcommand{\familydefault}{\sfdefault}\normalfont
 UNIVERSIDADE FEDERAL DO {\bf TOCANTINS} \vspace{-.4\baselineskip} \\
 PRÓ-REITORIA DE {\bf PESQUISA E PÓS-GRADUAÇÃO} \vspace{-.4\baselineskip} \\
-COORDENAÇÃO DE  {\bf INICIAÇÃO CIENTÍFICA} \vspace{-.4\baselineskip}\\
-\noindent\makebox[\linewidth]{\rule{\textwidth}{.5pt}}\vspace{-.4\baselineskip}
-\small\fontfamily{phv}\fontseries{mc}\selectfont
+COORDENAÇÃO DE {\bf INICIAÇÃO CIENTÍFICA} \vspace{-.4\baselineskip}\\
+\noindent\makebox[\linewidth]{\rule{\textwidth}{.5pt}}\vspace{-.4\baselineskip}\\
+\footnotesize\fontfamily{phv}\fontseries{mc}\selectfont
 \local@address\ | \local@cep\ | \local@city /TO \vspace{-.4\baselineskip} \\
 \local@phone\ | www.uft.edu.br | \local@mail 
 \end{flushright}
 \end{minipage}% This must go next to `\end{minipage}`
-\begin{minipage}{.225\textwidth}
+\begin{minipage}{.18\textwidth}
 \centering
-\includegraphics[scale=.4]{logouft}
-\end{minipage}\vspace{5pt}
-\noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}
-\renewcommand{\baselinestretch}{1}
+\includegraphics[scale=.3]{logos/logouft}
+\end{minipage}
+}{}
+   \setfoot{}{}{%
+\begin{minipage}{.8\textwidth}
+\begin{flushright}
+\thepage \\
+\parbox{0.15\textwidth}{\includegraphics[scale=.2]{logos/cnpq}}
+\parbox{-0.2\textwidth}{\includegraphics[scale=.1]{logos/logouft}}
+\end{flushright}
+\end{minipage}%
+}%
+}
 
+% \renewcommand*{\ps@plain}{%
+%   \let\@mkboth\@gobbletwo
+%   \let\@oddhead\@empty
+%   \def\@oddfoot{%
+%     \reset@font
+%     \hfil
+%     Página~\thepage~de~\pageref{LastPage}
+%     \hfil % removed for aligning to the right
+%   }%
+%   \let\@evenhead\@empty
+%   \let\@evenfoot\@oddfoot
+% }
+
+\renewcommand\maketitle{
+\newpage
+\thispagestyle{plain}
+\noindent
+% \begin{minipage}{.8\textwidth}
+% \begin{flushright}\renewcommand{\familydefault}{\sfdefault}\normalfont
+% UNIVERSIDADE FEDERAL DO {\bf TOCANTINS} \vspace{-.4\baselineskip} \\
+% PRÓ-REITORIA DE {\bf PESQUISA E PÓS-GRADUAÇÃO} \vspace{-.4\baselineskip} \\
+% COORDENAÇÃO DE  {\bf INICIAÇÃO CIENTÍFICA} \vspace{-.4\baselineskip}\\
+% \noindent\makebox[\linewidth]{\rule{\textwidth}{.5pt}}\vspace{-.4\baselineskip}
+% \small\fontfamily{phv}\fontseries{mc}\selectfont
+% \local@address\ | \local@cep\ | \local@city /TO \vspace{-.4\baselineskip} \\
+% \local@phone\ | www.uft.edu.br | \local@mail 
+% \end{flushright}
+% \end{minipage}% This must go next to `\end{minipage}`
+% \begin{minipage}{.225\textwidth}
+% \centering
+% \includegraphics[scale=.4]{logouft}
+% \end{minipage}\vspace{5pt}
+% \noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}
+% \renewcommand{\baselinestretch}{1}
+\vspace{15pt}
 \begin{center}
-\bf
-PROGRAMA INSTITUCIONAL DE BOLSAS DE INICIAÇÃO CIENT\'IFICA -- \local@projecttype \par \vspace{5pt}
-\MakeUppercase{\LARGE\it RELAT\'ORIO \local@reporttype} \par \vspace{10pt}
-\mybox{\MakeUppercase{\bf\local@title}} \vspace{.25cm}
+% \bf
+% PROGRAMA INSTITUCIONAL DE BOLSAS DE INICIAÇÃO CIENT\'IFICA -- \local@projecttype \par \vspace{5pt}
+% \MakeUppercase{\LARGE\it RELAT\'ORIO \local@reporttype} \par 
+%\vspace{20pt}
+\mybox{\large\MakeUppercase{\bf\local@title}} %\vspace{.25cm}
 \end{center}
 
-\MakeUppercase{\bf Nome do(a) bolsista}: \@authname\ \@authsurn \par
+\vspace{20pt}
+
+\begin{flushright} 
+\footnotesize
+
+\@authname\ \@authsurn \par
 
 \nohyphens{%
     \count1=0
     %\toks@={}
     \@whilenum \count1<\@advisor \do{%
     \ifcase\count1 % same as \ifnum0=\count1
-       \MakeUppercase{\bf\local@advisorstring}: \csname uftAdvisorDegree:\the\count1 \endcsname \ 
+       \csname uftAdvisorDegree:\the\count1 \endcsname \ 
         \csname uftAdvisorName:\the\count1 \endcsname \ 
         \csname uftAdvisorSurname:\the\count1 \endcsname \ \par
     \else
-        \MakeUppercase{\bf\local@coadvisorstring}: \csname uftAdvisorDegree:\the\count1 \endcsname \ 
+        \csname uftAdvisorDegree:\the\count1 \endcsname \ 
         \csname uftAdvisorName:\the\count1 \endcsname \ 
         \csname uftAdvisorSurname:\the\count1 \endcsname \ \par
     \fi
     \advance\count1 by 1} \par
 }
+\end{flushright} 
 
-\MakeUppercase{\bf campus}: \local@campus \par
-\MakeUppercase{\bf curso}: \local@department \par
-\MakeUppercase{\bf local de execução}: \local@local\par
-\MakeUppercase{\bf Data de início}: \local@datainicio \par
-\MakeUppercase{\bf Data de conclusão}: \local@dataconclusao \par
+% \MakeUppercase{\bf campus}: \local@campus \par
+% \MakeUppercase{\bf curso}: \local@department \par
+% \MakeUppercase{\bf local de execução}: \local@local\par
+% \MakeUppercase{\bf Data de início}: \local@datainicio \par
+% \MakeUppercase{\bf Data de conclusão}: \local@dataconclusao \par
 
-\vfill
+% \vfill
 
-{\it Data e Assinatura do Bolsista:} \par \vspace{.75cm}
-\noindent{\rule{10cm}{0.4pt}} \par \vspace{.75cm}
-{\it Data e Assinatura do Orientador:} \par \vspace{.75cm}
-\noindent{\rule{10cm}{0.4pt}}
+% {\it Data e Assinatura do Bolsista:} \par \vspace{.75cm}
+% \noindent{\rule{10cm}{0.4pt}} \par \vspace{.75cm}
+% {\it Data e Assinatura do Orientador:} \par \vspace{.75cm}
+% \noindent{\rule{10cm}{0.4pt}}
 
-\pagebreak
-\pagestyle{plain}
-\begin{center}
-\bf APRESENTAÇÃO
-\noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}
-\end{center}
+% \pagebreak
+% \pagestyle{plain}
+% \begin{center}
+% \bf APRESENTAÇÃO
+% \noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}
+% \end{center}
 
-\par \vspace{.75cm}
+% \par \vspace{.75cm}
+\vspace{20pt}
 
-\MakeUppercase{\bf grande área do conhecimento (UFT)}: \local@area \par
-{\bf ÁREA DO CONHECIMENTO (CNPq)}: \local@area \par
-\MakeUppercase{\bf nome do grupo de pesquisa}: \local@grupo \par \vspace{.75cm}
+\MakeUppercase{\bf grande área do conhecimento}: \local@area \par
+%{\bf ÁREA DO CONHECIMENTO (CNPq)}: \local@area \par
+%\MakeUppercase{\bf nome do grupo de pesquisa}: \local@grupo \par \vspace{.75cm}
 
-{\bf GRANDES ÁREAS DO CONHECIMENTO DA UFT: \par \vspace{.75cm}
-%CIÊNCIAS AGRÁRIAS \par
-%CIÊNCIAS BIOLÓGICAS E DA SAÚDE \par
-CIÊNCIAS EXATAS E DA TERRA \par
-%CIÊNCIAS HUMANAS, SOCIAIS APLICADAS E LETRAS \par 
-} 
+% {\bf GRANDES ÁREAS DO CONHECIMENTO DA UFT: \par \vspace{.75cm}
+% %CIÊNCIAS AGRÁRIAS \par
+% %CIÊNCIAS BIOLÓGICAS E DA SAÚDE \par
+% CIÊNCIAS EXATAS E DA TERRA \par
+% %CIÊNCIAS HUMANAS, SOCIAIS APLICADAS E LETRAS \par 
+% } 
+\vspace{20pt}
+{\bf Palavras-chave}: \count1=0 \count2=1
+\@whilenum \count1<\value{keywords} \do {%
+    \ifnum\count2=\value{keywords}
+        \csname uftKeyword:\the\count1 \endcsname.
+    \else
+        \csname uftKeyword:\the\count1 \endcsname,
+    \fi
+        \advance\count1 by 1
+        \advance\count2 by 1}\par
 
 \renewcommand{\baselinestretch}{1.5}
 }
 
 
-% Defining how is typeset the \chapter
-\def\@makechapterhead#1{%
-  {%
-%  \noindent\rule{\textwidth}{1.7pt}\\\par
-  \normalfont\bfseries
-  \vspace*{0pt}%
-  \noindent%
-  \parbox[b]{\textwidth}{%
-    \parbox[t]{4ex}{}%
-    \parbox[t]{\textwidth-4ex-1ex}%
-      {\interlinepenalty\@M\centering%
-        \MakeUppercase{ #1}
-\noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}
-      }%
-    \vspace*{10pt}
-    }\\[2pt]%
-  \vspace{0pt}%
-  }%
-}
-
-\renewcommand{\colorsectionss}[2]{%
-  \colorbox{white}{\parbox{\dimexpr\textwidth-2\fboxsep}{\color{black} #2}}}
-
-
 \renewcommand{\colorsection}[2]{%
 \ifcase#1
-  \colorbox{white}{\parbox{\dimexpr\textwidth-2\fboxsep}{\color{black}\centering\bf\MakeUppercase{#2}
-\noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}}}
+  \colorbox{cor}{\parbox{\dimexpr\textwidth-2\fboxsep}{\color{cortexto}\MakeUppercase{#2}}}
 \else
-  \colorbox{white}{\parbox{\dimexpr\textwidth-2\fboxsep}{\color{black}\MakeUppercase{ #1~--~#2}}}
+  \colorbox{cor}{\parbox{\dimexpr\textwidth-2\fboxsep}{\color{cortexto}\MakeUppercase{#2}}}
  \fi}
-
-   \def\l@chapter#1#2{\pagebreak[3]
-     \vskip 0.0em plus 0pt 
-    \@tempdima .65cm
-\begingroup
-    \def\numberline##1{\hb@xt@\@tempdima{\hfil}}%<------ this line added
-     \parindent \z@ \rightskip \@pnumwidth 
-     \bfseries
-     \leavevmode     
-    \uppercase{#1}\hfil \cftdotfill{\cftdotsep} \hbox to\@pnumwidth{\hss #2}\medskip\par
- \endgroup}
-
-\def\l@section#1#2{\pagebreak[3]
-       \vskip 0.0em plus 0pt 
-       \@tempdima  .65cm     
-       \begingroup
-      \def\numberline##1{\hb@xt@\@tempdima{\hfil}}%<------ this line added
-         \parindent \z@ \rightskip \@pnumwidth
-        % \parfillskip -\@pnumwidth
-        \normalsize\bfseries   
-         \leavevmode         
-         #1\hfil \cftdotfill{\cftdotsep} \hbox to\@pnumwidth{\hss #2}\medskip\par
-       \endgroup}
+\renewcommand{\thechapter}{\arabic{chapter}}
+\titleformat{\chapter}		
+  {\bf}
+  {}
+  {-5pt}
+  {\colorsection\thechapter}
+\titlespacing*{\chapter}{0pt}{20pt}{\baselineskip}
 
 \pagestyle{plain}
 }
@@ -543,16 +557,6 @@ CIÊNCIAS EXATAS E DA TERRA \par
 \DeclareOption{geral}{
    \colorlet{cor}{amarelo}
    \colorlet{cortexto}{preto}
-}
-
-\DeclareOption{2019}{
-   \colorlet{cor}{cinza2}
-   \colorlet{cortexto}{preto}
-}
-
-\DeclareOption{2024}{
-   \colorlet{cor}{azul}
-   %\colorlet{cortexto}{preto}
 }
 
 \DeclareOption{professor}{
