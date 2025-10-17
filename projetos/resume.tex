@@ -1,0 +1,67 @@
+\documentclass{article}
+\usepackage[alf,abnt-emphasize=bf]{../abntex2/abntex2cite}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{colortbl}
+
+\begin{document}
+
+Eficiência energética é a técnica de utilização da menor quantidade possível de energia para obter um resultado, ou realizar uma tarefa, sem que haja desperdício energético. Nesse contexto, junto a área de sistemas digitais, é interessante estudar a aplicação desta técnica para otimizar o uso dessa energia mantendo ou até aumentando o poder de processamento e assim diminuindo o impacto ambiental e avançando a tecnologia.
+
+Os estudos dos artigos exploraram implementações de \textit{full adders} em diferentes famílias de FPGA's (\textit{Field Programmable Gate Array}), como \textbf{Kintex, Genesys, Zed, Virtex e Zynq}, identificando quais delas obtinham melhores desempenhos e comparando-as através de consumo dinâmico e estático, dissipação térmica e utilização de LUT's (\textit{lookup tables}). Os resultados apresentados foram que as placas \textbf{Zed} e \textbf{Genesys} apresentaram maior eficiência energética, enquanto as outras tiveram um gasto de energia muito maior \cite{art1}, \cite{art2}.
+
+Outras pesquisas, realizadas com \textit{half adders}, mostraram que famílias como \textbf{Airtex e Genesys} oferecem um balanceamento vantajoso no uso de energia (aproximadamente 0.8 Watts) combinado com uma baixa temperatura (58 ºC) em comparação com placas \textbf{Virtex e Kintex} \cite{art3}, \cite{art5}. Essas diferenças apontam para potenciais aplicações de \textit{green computing}, já que a placa \textbf{Airtex} tem menor custo que as outras \cite{art3}.
+
+De forma complementar, foi também apresentado a metodologia \textit{DeMAS} que propõe uma forma de implementar \textit{approximate adders} para placas FPGA no geral, seja qual for sua arquitetura. Esse método, testado em 8 somadores diferentes, atingiu reduções de 50\% de área, 38\% de latência e 53\% de PDP (\textit{power delay product}). Isso demonstrou que os \textit{approximate adders} são alternativas viáveis para substituir \textit{accurate adders} em aplicações tolerantes a erro \cite{art4}.
+
+Dessa forma, pode-se concluir que os estudos evidenciaram que a escolha do FPGA tem impacto direto sobre o custo energético, sendo as famílias \textbf{Zed, Airtex e Genesys} as mais adequadas em questão de eficiência energética enquanto placas \textbf{Kintex e Virtex} oferecem maior desempenho mas com um maior custo de energia. Além disso, o método \textbf{DeMAS} aparece como uma técnica para auxiliar nos estudos e na implementação de somadores equilibrando desempenho e eficiência.
+
+\begin{table}[p]
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\rowcolor[HTML]{FFFFC7} 
+{\color[HTML]{000000} \textbf{Article Name}} &
+  {\color[HTML]{000000} \textbf{FPGA}} &
+  {\color[HTML]{000000} \textbf{Software}} &
+  {\color[HTML]{000000} \textbf{Language}} &
+  {\color[HTML]{000000} \textbf{On-Chip Power}} &
+  {\color[HTML]{000000} \textbf{Adder}} \\ \hline
+\textbf{\begin{tabular}[c]{@{}c@{}}Simulation-Based Analysis of Power,\\  Hardware, and Temperature Constraints\\  in 4-Bit Full Adder Circuits for High-Speed\\  Data Processing\end{tabular}} &
+  Virtex and Zynq boards &
+  Vivado &
+  VHDL &
+  \begin{tabular}[c]{@{}c@{}}Virtex = 6.948w\\ Zynq = 2.802w\end{tabular} &
+  4-bit Full adder \\ \hline
+\textbf{\begin{tabular}[c]{@{}c@{}}Comparative Analysis of Hardware and\\  Software utilization in the implementation\\  of Full Adder using Vivado\end{tabular}} &
+  Zed, Kintex and Genesys &
+  Vivado &
+  Not especified &
+  \begin{tabular}[c]{@{}c@{}}Genesys = 1.082w\\ Kintex = 1.515w\\ Zed = 1.025w\end{tabular} &
+  Full adder \\ \hline
+\textbf{\begin{tabular}[c]{@{}c@{}}Comparative Analysis of Power, Temperature\\  and Hardware Utilization on Implementation\\  of Half Adder\end{tabular}} &
+  Airtex, Kintex and Virtex &
+  Vivado &
+  Not especified &
+  \begin{tabular}[c]{@{}c@{}}Airtex = 0.795w\\ Vintex = 1.013w\\ Kintex = 1.294w\end{tabular} &
+  Half adder \\ \hline
+\textbf{\begin{tabular}[c]{@{}c@{}}DeMAS: An Efficient Design Methodology for\\  Building Approximate Adders for FPGA-Based\\  Systems\end{tabular}} &
+  Virtex-7 (7VX330T) &
+  Xilinx ISE 14.7 &
+  VHDL &
+  Not especified &
+  1/2 bit(s) approximate adders (scalable for 16 bits) \\ \hline
+\textbf{\begin{tabular}[c]{@{}c@{}}Exploring Temperature, Power, and Hardware\\  Utilization in Half Adder Implementation on \\ FPGA Platforms\end{tabular}} &
+  Genesys, Virtex &
+  Vivado &
+  VHDL &
+  \begin{tabular}[c]{@{}c@{}}Virtex = 3.616w\\ Genesys = 0.824w\end{tabular} &
+  Half adder \\ \hline
+\end{tabular}
+\end{table}
+
+
+\vspace{1.25cm}
+\bibliography{bibliografia}
+
+\end{document}

@@ -1,0 +1,126 @@
+\documentclass[12pt]{uftpibicsic}
+
+\usepackage[alf,abnt-emphasize=bf]{abntex2cite}
+\renewcommand{\backrefpagesname}{}
+\renewcommand{\backref}{}
+\renewcommand*{\backrefalt}[4]{}
+\renewcommand{\bibname}{Literatura Citada}
+
+\graphicspath{{figures/} {imagens/} {}}
+
+%-------------------------------------------------------------------------------------------------------------------------%
+% Dados do Projeto
+%-------------------------------------------------------------------------------------------------------------------------%
+
+\title{RUTI - Rastreamento Urbano de Transporte Integrado: módulo de comunicação e correção de erros na estação}
+
+\author{Leonardo Rezende Costa\inst{1} \\Prof Me. Tiago da Silva Almeida\inst{2}}
+
+\address{Aluno do Curso de Ciência da Computação;  Campus de Palmas; e-mail: leonardorec1@gmail.com; PIVIC/UFT;
+\nextinstitute
+Orientador do Curso de Ciência da Computação; Campus de Palmas; e-mail: tiagoalmeida@uft.edu.br}
+
+\campus{Câmpus de Palmas}
+\area{Ciências Exatas e da Terra}
+
+  % ---- Palavras-chaves em português do trabalho
+  \keyword{FPGA}
+  \keyword{Multiplicadores}
+  \keyword{Computação Aproximada}
+  \keyword{HDL}
+  \keyword{Eficiência Energética}
+  % ---- Palavras-chaves em inglês do trabalho
+  \foreignkeyword{FPGA}
+  \foreignkeyword{Multipliers}
+  \foreignkeyword{Approximate Computing}
+  \foreignkeyword{HDL}
+  \foreignkeyword{Energy Efficiency}
+
+
+
+\begin{document}
+
+\mainmatter
+\maketitle
+
+\begin{spacing}{1}
+\begin{abstract}
+
+\end{abstract}
+
+\begin{foreignabstract}
+
+\end{foreignabstract}
+\end{spacing}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Introdução}
+% Nesse ponto é necessário dar um contexto sobre o trabalho. Pense em um texto que responde as seguintes perguntas:
+
+% O que é eficiência energética?
+
+% Por que é importante estudar esse assunto?
+
+% Qual é o problema que você vai estudar?
+
+% Após explicar sobre isso é o momento de dizer qual é a sua pergunta de pesquisa, por exemplo:
+
+\begin{quote}
+Qual a diferença no consumo de energia de diferentes divisores aproximados em dispositivos FPGA e como esse consumo de energia se relaciona com o erro do divisor?
+\end{quote}
+
+% Aqui é importante explicar a pergunta, ou relaciona-la com o problema e área de pesquisa que foi discutida acima
+
+
+% Após vem as hipóteses de pesquisa, por exemplo:
+
+Hipótese nula ($H_{1_{0}}$) é \textit{todos os modelos de somadores aproximados tem o mesmo resultado para todas as variáveis dependentes $(\mu_{(1)}, \mu_{(2)}, ..., \mu_{(n)})$ (energia e erro)}. A hipótese alternativa ($H_{1_{a}}$) é \textit{há uma diferença entre somadores aproximados diferentes para pelo menos um par $i$, $j$ para $i \neq j$, sendo $i \neq j$}.
+
+% Aqui você pode explicar melhor e definir os objetivos do estudo, como:
+
+Analisar \rule{5cm}{0.4pt}
+%<Object(s) of study>
+com o objetivo de \rule{5cm}{0.4pt}
+%<Purpose>
+com relação à \rule{5cm}{0.4pt}
+%<Quality focus>
+do ponto de vista do \rule{5cm}{0.4pt}
+%<Perspective>
+no contexto de \rule{5cm}{0.4pt}
+%<Context>.
+
+\chapter{Trabalhos relacionados e fundamentos}
+% Nesse ponto do texto, você pode explicar os 5 artigo que você selecionou sobre a literatura. (não esquece de colocar a string de busca e falar qual a base de dados você usou)
+% Além disso, imagine que o leitor não sabe nada sobre o assunto, então você vai explicar:
+
+% O que é um somador? (exemplo)
+
+% O que é um multiplicador? (exemplo)
+
+% O que é computação approximada? (exemplo)
+
+% O que é FPGA? (exemplo)
+
+% Como o seu trabalho está relacionado com os 5 que você explicou? (exemplo)
+
+
+\chapter{Materiais, métodos e resultados esperados}
+% Aqui você vai explicar como você vai fazer seu trabalho, por exemplo, mostrar:
+
+% As métricas de erro que você vai usar
+% Os softwares e linguagem que você vai usar
+% Qual modelo de FPGA você vai usar
+% Como você vai capturar os resultados (simulação ou leitura da placa)
+% Como você vai testar a hipótese. Aqui você pode descrever e usar os testes de hipótese clássicos, como: regressão linear, ANOVA e t-test.
+
+\chapter{Considerações finais e cronograma de trabalho}
+% Aqui é só recaptular tudo que foi dito e fazer um cronograma do que ainda falta ser feito.
+
+% Minha sugestão é explicar de maneira clara o que ainda será feito e criar um cronograma para o relatório final.
+
+\bibliography{bibliografia}
+
+
+\end{document}
+

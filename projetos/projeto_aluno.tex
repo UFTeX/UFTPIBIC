@@ -1,6 +1,6 @@
 \documentclass[12pt,consuni]{uftpibic}
 
-\usepackage[alf]{../abntex2/abntex2cite}
+\usepackage[alf,abnt-emphasize=bf]{../abntex2/abntex2cite}
 %\renewcommand{\backrefpagesname}{}
 %\renewcommand{\backref}{}
 \renewcommand*{\backrefalt}[4]{}
@@ -19,25 +19,19 @@
 %-------------------------------------------------------------------------------------------------------------------------%
 % Dados do Projeto
 %-------------------------------------------------------------------------------------------------------------------------%
-\title{Análise de correlação estatística entre dados da rede EMBRACE e imagens solares}
-\advisor{Prof.}{Tiago da Silva}{Almeida}{Ms.}
-\author{Caio Henrique}{Machado}
-\campus{Campus Universitário de Palmas -- CUP}
+\title{Implementação e testes de eficiência energética de circuito de soma em FPGA}
+
+\advisor{Prof.}{Tiago da Silva}{Almeida}{Me.}
+\author{João Pedro Oliveira}{Barbosa}
 \department{Ciência da Computação}
-\local{Campus Universitário de Palmas -- CUP, Bloco III, Sala 107}
-\area{Ciências Exatas e da Terra}
-\financiamento{}
-\grupo{GCC -- Grupo de Computação Cientifica}
-\keyword{INPE}
-\keyword{EMBRACE}
-\keyword{NASA}
-\keyword{SOHO}
-\keyword{Tempestade Solar}
-\keyword{Clima Espacial}
-\keyword{Redes Neurais Artificiais}
-\keyword{Aprendizado de Máquina}
-\equipeexecutora{\bf Tiago da Silva Almeida}{\bf Coordenador}
-\equipeexecutora{Caio Henrique Machado}{Aluno}
+
+\keyword{Eficiência Energética}
+\keyword{FPGA}
+\keyword{Somador}
+\keyword{Verilog}
+\keyword{Desempenho}
+\keyword{Vivado}
+
 %-------------------------------------------------------------------------------------------------------------------------%
 % Para evitar a quebra automática dos Capítulos, descomentar abaixo
 %-------------------------------------------------------------------------------------------------------------------------%
@@ -55,137 +49,96 @@
 \setlength{\parindent}{1.5cm}
 \chapter{Introdução}
 
-A maioria das tempestades solares produzem apenas pequenas perturbações na Terra como pequenas variações momentâneas da alimentação das redes de energia elétrica, interferência na comunicação entre aparelhos eletrônicos, necessidade de novo traçado de rotas para aeronaves, perda de alguns satélites e belíssimas auroras boreal e austral. Mas uma tempestade solar pode ter a capacidade de causar grandes desastres na Terra caso se torne maior. A tempestade solar de setembro de 1859, que ficou conhecida como \textit{Carrington Flare} (Labareda de Carrington) foi um exemplo \cite{Carrington}. Outro exemplo aconteceu em julho de 2000, quando o governo japonês lançou um satélite telescópio, parte de programa de astronomia, que sofreu danos irreversíveis após ser pego por uma tempestade solar \cite{Dennis}.
+\textit{Field Programmable Gate Array} (FPGA) é um tipo de circuito integrado versátil projetado para ser programável (e muitas vezes reprogramável), usado para atender a diferentes propósitos, principalmente computação de alto desempenho e prototipagem \cite{ibm_fpga_2024}. É um dispositivo amplamente utilizado devido à sua versatilidade e poder de processamento e atualmente pode ser encontrado em segmentos automotivo, aeroespacial, industrial, telecomunicações e vários outros.
 
-Existem hoje dois sistemas de captura de informações relacionadas à influência solar na Terra e ao comportamento do sol que são de interesse deste trabalho: a Rede Embrace de Magnetômetros (Embrace MagNet) \cite{Denardini}, uma rede de sensores posicionados estrategicamente por toda a América Latina; e os satélites posicionados orbitando a Terra, capturando dados através de sensores gerando imagens, no projeto de estudos solar da NASA, SOHO (Solar and Heliospheric Observatory) \cite{Akmal}.
+Este dispositivo é composto por \textit{programmable logic blocks} (PLBs) que implementam as funções lógicas, \textit{programmable routing} que conectam essas funções lógicas e blocos de entrada/saída que são conectados aos blocos lógicos por meio das interconexões de roteamento e que fazem conexões com dispositivos externos (\textit{off-chip}) \cite{Farooq2012}. Graças à sua arquitetura, é possível realizar vários testes e aplicações, como execução de algoritmos para análise de desempenho até operações em paralelo que podem ser mais rápidas do que em processadores (CPU - \textit{Central Processing Unit}) convencionais.
 
-A previsibilidade dos dados é fundamental para o sistema de alertas de tempestade solares, já existente no Brasil, por meio da Embrace MagNet. Além de ser uma fonte de dados muito importante na crescente pesquisa e entendimento dos fenômenos eletromagnéticos do nosso planeta e do sistema Solar.
-
-Pensando nisso, o objetivo deste trabalho é demonstrar e mensurar o grau de confiabilidade da correlação entre os dados dos dois sistemas de captura de informações solares, utilizando um modelo de RNA (Redes Neurais Artificiais). Se houver essa correlação, consideramos ser possível fazer modelos preditivos permitindo nos preparar para eventuais perturbações. Tal preparação seria fundamental na prevenção de danos uma vez que as tempestades solares viajam na velocidade da luz, dando-nos uma janela de tempo muito pequena de ação (em torno de oito minutos para chegar a Terra).
+Em qualquer sistema computacional a operação mais fundamental é a operação de soma, que são realizadas por circuitos lógicos chamados somadores. Estes circuitos são tão elementares que são utilizados na construção de outros circuitos aritméticos (CA), tais quais subtratores, multiplicadores e divisores. Embora seja simples, é a base para todas as operações matemáticas fundamentais, é o componente central da Unidade Lógica e Aritmética (ULA), que é responsável pelas operações matemáticas do processador \cite{toccisistemas}, e é aplicado em contadores e endereçamento de memória. Como é um circuito utilizado com muita frequência, profissionais investem em sua otimização. Ou seja, o desempenho de um processador está diretamente ligado à eficiência do somador.
 
 \vspace{1.5cm}
 \chapter{Objetivos}
 
-O objetivo deste trabalho é obter dados dos sistemas EMBRACE e SOHO de captura de informações solares e traçar um comparativo fazendo uso de redes neurais artificiais para averiguar a concordância entre as informações e estabelecer e mensurar um grau de confiabilidade dessa correlação. Os passos se darão da seguinte maneira:
+O objetivo deste trabalho é contribuir com pesquisa e testes em placa FPGA para a análise de eficiência energética de diferentes arquiteturas de somadores digitais, e servir como material de referência e base de estudos para outros alunos que forem realizar pesquisas, projetos e testes na área, fornecendo informações e resultados que os auxiliem na execução de suas tarefas. Os passos se darão da seguinte maneira:
 
 \begin{itemize}
-\item Estudar os principais índices de medição eletromagnética da Terra (índice Pk);
-\item Estudar os principais modelos de RNA e aprendizado profundo aplicado ao problema e implementar o modelo mais eficaz;
-\item Criar um modelo baseado em RNA tendo como dado de entrada as imagens solares;
-\item Coletar e classificar os dados;
-\item Analisar o grau de erro do modelo;
-\item Quantificar de forma estatística por meio de teste de hipóstese a correlação entre as variáveis;
+\item Selecionar e estudar os principais tipos de somadores digitais;
+\item Implementação dos somadores em Verilog;
+\item Mapeamento em um FPGA da Xilinx;
+\item Comparação considerando área, potência e frequência;
+%\item Aplicação de técnicas de otimização, como \textit{clock gating}, para redução de consumo.
+\item Realização de medições de consumo energético, desempenho e temperatura.
 \end{itemize}
 
 
 \vspace{1.5cm}
 \chapter{Plano de trabalho individualizado}
 
-Um dos principais objetivos da ciência espacial é determinar a origem da atividade eruptiva do sol, a qual eventualmente vai ditar a variabilidade magnetosférica e ionosférica da Terra. O Estudo e Monitoramento Brasileiro de Clima Espacial (EMBRACE) desenvolveu a Rede de Magnetômetros Embrace (Embrace MagNet) para cobrir a maior parte do setor longitudinal leste da América do Sul, onde a UFT tem a satisfação de sediar um dos sensores, tendo como um dos objetivos fornecer informações para serem usadas como estimativa dos níveis de perturbações causadas pelas tempestades geomagnéticas. Para isto, o programa desenvolveu o Índice K (Ksa) da América do Sul que é usado para caracterizar a magnitude das tempestades geomagnéticas ajudando a decidir se os alertas geomagnéticos devem ser repassados para seus usuários que são afetados por estas perturbações.
+O projeto será realizado a partir de pesquisas e implementações em uma placa \textit{Boolean Board}. Inicialmente, será necessário o estudo teórico mais profundo sobre somadores, que consistem em circuitos lógicos que fazem a soma de dois números binários e geralmente podem ser divididos entre meio somador (\textit{Half-Adder} - HA) e somador completo (\textit{Full-Adder} - FA), que são os principais tipos de somadores, para depois iniciar os testes na placa em si \cite{toccisistemas}. 
 
-Os principais usuários afetados pelas tempestades geomagnéticas são redes de energia, operações de aeronaves, usuários de sinais de rádio que refletem ou atravessam a ionosfera, e observadores da aurora.
+A atividade de projeto em FPGAs envolve alguns passos básicos: i) análise de código em HDL (\textit{Hardware Description Language}), ii) síntese, que é a tradução do projeto em relação à estrutura de PLBs; iii) mapeamento da quantidade de PLBs necessária ao projeto e o que existe disponível na FPGA; iv) e por fim o roteamento dessa estrutura para o modelo de FPGA específico e geração do \textit{stream} de bits para gravação na FPGA. 
 
-A principal ferramenta usada para este projeto será uma rede neural artificial. Redes neurais artificiais são técnicas de aprendizado de máquina que simulam os mecanismos de aprendizado de organismos biológicos. O sistema nervoso humano contém células chamadas de neurônios que são conectados uns aos outros pelos axiomas e dentritos, e as regiões onde os axiomas e dentritos se conectam são chamadas de sinapses. 
+Ainda, HDL é uma linguagem de programação que tem por função especificar o comportamento, a estrutura e o funcionamento de um circuito digital e possui características particulares como expressar \textit{clocks}, sequenciar operações e descrever construções usando vetores \cite{Flake2020}. 
 
-%\begin{figure}[!htpb]
-%    \centering
-%    \caption{Representação de neurônios biológicos}
-%    \includegraphics[width=.7\linewidth]{neuron.jpg}
-%    \label{fig:neuron}
-%\end{figure}
-
-%\begin{figure}[!htpb]
-%    \centering
-%    \caption{Representação de neurônios artificiais}
-%    \includegraphics[width=.6\linewidth]{aneuron.jpeg}
-%    \label{fig:neuron}
-%\end{figure}
-
-
-%A força entre as ligações sinápticas muda de acordo com estímulos externos, e é esta mudança que causa o aprendizado em organismos vivos. O mecanismo biológico é simulado em redes neurais artificiais, as quais contêm unidades computacionais a que também chamamos de neurônios. As unidades computacionais são conectadas umas as outras por pesos, os quais servem com o mesmo propósito que as intensidades das conexões sinápticas nos organismos biológicos.
-%Cada informação fornecida a um neurônio é qualificada com um peso, o que afeta a função computada na unidade. A rede neural computa as informações propagando os valores de um neurônio a outro usando os pesos das entradas como parâmetros. O aprendizado acontece ao que os valores dos pesos se modificam. As informações fornecidas à rede durante o treinamento servem como o estímulo externo do aprendizado, oferecendo exemplos de entradas e saídas da função a ser aprendida. Por exemplo, as informações de treinamento podem ser dados contendo representações de pixels de uma imagem, e a saída, etiquetas para classificação da imagem de acordo com o que ela representa. Essas informações de entrada e saída como treinamento são alimentadas à rede neural para fazer futuras predições das saídas. A informação de treinamento fornece correção aos pesos da rede neural dependendo de quão boa foi a predição da saída. O objetivo de modificar os pesos das sinapses é de modificar a função para que as futuras predições sejam mais corretas. Após sucessivas correções e ajustes dos pesos, a função computada pela rede neural é refinada para fornecer predições com maior acurácia. Assim, se uma rede neural é treinada com muitas imagens diferentes de um objeto, uma cadeira por exemplo, eventualmente será capaz de reconhecer uma cadeira que nunca viu antes. A utilidade primária de todo modelo de aprendizado de máquina é sua habilidade de generalizar seu aprendizado a partir de dados de treinamento fornecidos para exemplos novos nunca vistos \cite{SandroSkansi2018}.
-
-Na busca por cada vez melhores resultados, pesquisadores e estudiosos das redes neurais e aprendizado de máquina alcançaram uma técnica denominada Aprendizado Profundo (Deep Learning), que consistia não só em processar os dados de forma análoga a um sistema neural biológico, mas também simulava uma capacidade cognitiva ao construir um processo mental mais elaborado fazendo uso de um número maior de camadas de processamento, chamadas de camadas ocultas (\textit{Hidden Layers}). Esta Técnica tomava mais tempo, mas apresentava melhores resultados. Neste trabalho vamos estudar o ganho de usarmos um modelo de Aprendizado Profundo tentando mensurar o ganho na precisão contra o tempo gasto, decidindo assim fazer uso ou não da metodologia para o resultado final.
+Os códigos HDL serão realizados no software Vivado e, então, após analisar e concluir a implementação dos somadores. O ambiente de projeto do Vivado possui um analisador de consumo de energia baseado em arquivos tipo SAIF (\textit{Switching Activity Interchange Format}) que serão usados nessa pesquisa, além de sensores já embutidos na placa de projeto. 
 
 \vspace{1.5cm}
 \chapter{Cronograma de execução}
 
-As atividades do trabalho são divididas conforme a Tabela \ref{tb:atividades}, enumeradas de A à J, e sua execução é de acordo com o cronograma da Tabela \ref{tb:cronograma}.
+As atividades do trabalho são divididas conforme a Tabela \ref{tb:atividades}, enumeradas de A à H, e sua execução é de acordo com o cronograma da Tabela \ref{tb:cronograma}.
 
 \begin{table}[!h]
   \centering
-  \footnotesize
+  %\footnotesize
   \caption{Lista de atividades previstas.}\label{tb:atividades}
   \begin{tabular}{cp{9.4cm}}
-    \hline \hline &\\[-0.4cm]
+    \toprule
     {\bf Atividades} & \multicolumn{1}{c}{\bf Descrição} \\
-    \hline
+    \midrule
     &\\[-0.4cm]
-    \textbf{A} &  Estudo da teoria e prática de redes neurais artificiais. \\[0.2cm]
-    \textbf{B} &  Desenvolvimento e treinamento de uma rede neural artificial.\\[0.2cm]
-    \textbf{C} &  Estudo da teoria e prática de processamento de imagens e descretização das imagens dos satélites.\\[0.2cm]
-    \textbf{D} &  Alimentação da rede neural artificial com os dados das imagens e verificação de resultados. \\[0.2cm]
-    \textbf{E} &  Aplicação e desenvolvimento de algoritmo de aprendizado de máquina. \\[0.2cm]
-    \textbf{F} &  Coleta de dados da rede EMBRACE.\\[0.2cm]
-    \textbf{G} & Estudo e criação do modelo de inferência linear entre as variáveis de estudo.\\[0.2cm]
-    \textbf{H} & Análise estatística dos resultados. \\[0.2cm]
-    \textbf{I} &  Escrita de relatório parcial em forma de trabalhos parciais para publicação em congressos e/ou periódicos e como relatório de prestação de contas com os sistemas de gestão da UFT. \\[0.2cm]
-    \textbf{J} &  Escrita de relatório final em forma de trabalhos parciais para publicação em congressos e/ou periódicos e como relatório de prestação de contas com os sistemas de gestão da UFT. \\[0.2cm]
-    \hline \hline
+    \textbf{A} &  Estudo teórico sobre FPGAs, somadores e Verilog. \\[0.2cm]
+    \textbf{B} &  Implementação de diferentes arquiteturas de somadores em Verilog.\\[0.2cm]
+    \textbf{C} &  Mapear o FPGA utilizado para os testes.\\[0.2cm]
+    \textbf{D} &  Testes práticos e simulações no Vivado.\\[0.2cm]
+    \textbf{E} &  Coleta e análise de métricas (área, potência, frequência). \\[0.2cm]
+    \textbf{F} &  Aplicação de técnicas de otimização. \\[0.2cm]
+    \textbf{G} &  Escrita de relatório parcial em forma de trabalhos parciais para publicação em congressos e/ou periódicos e como relatório de prestação de contas com os sistemas de gestão da UFT. \\[0.2cm]
+    \textbf{H} &  Escrita de relatório final em forma de trabalhos parciais para publicação em congressos e/ou periódicos e como relatório de prestação de contas com os sistemas de gestão da UFT. \\[0.2cm]
+    \bottomrule
   \end{tabular}
 \end{table}
 
 
 \begin{table}[!ht]
   \centering %\fontsize{8}{12}%\tiny
-  \caption{Cronograma de Atividades.}\label{tb:cronograma}
+  \caption{Cronograma previsto das atividades descritas na Tabela \ref{tb:atividades}, destacando sua execução mês a mês.}\label{tb:cronograma}
   \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
     \hline
-    {\normalsize\bf Ano}  &\multicolumn{12}{c|}{\normalsize\bf 2020/2021}\\
+    Ano  &\multicolumn{12}{c|}{2025/2026}\\
     \hline
- {\normalsize\bf Mês} &
-\multirow{2}*{\bf Jul}&\multirow{2}*{\bf Ago}&\multirow{2}*{\bf Set}&\multirow{2}*{\bf Out}&\multirow{2}*{\bf Nov}&\multirow{2}*{\bf Dez}&
-\multirow{2}*{\bf Jan}&\multirow{2}*{\bf Fev}&\multirow{2}*{\bf Mar}&\multirow{2}*{\bf Abr}&\multirow{2}*{\bf Mai}&\multirow{2}*{\bf Jun} \\
+ {Mês} &
+\multirow{2}*{Set}&\multirow{2}*{Out}&\multirow{2}*{Nov}&\multirow{2}*{Dez}&\multirow{2}*{Jan}&\multirow{2}*{Fev}&
+\multirow{2}*{Mar}&\multirow{2}*{Abr}&\multirow{2}*{Mai}&\multirow{2}*{Jun}&\multirow{2}*{Jul}&\multirow{2}*{Ago} \\
    \cline{1-1}
-{\bf Atv.}    & & & & & & & & & & & &   \\
+Atv. & & & & & & & & & & & &   \\
 \hline
-{\normalsize\bf A} & $\surd$ & $\surd$ & & & & & & & & & &  \\
+A & X & X & X & X &   &   &   &   &   &   &   &   \\
 \hline
-{\normalsize\bf B} & & $\surd$ & $\surd$ & $\surd$ & $\surd$ & $\surd$ & $\surd$ & & & & & \\
+B &   &   &   & X & X & X &   &   &   &   &   &   \\
 \hline
-%\hhline{>{\arrayrulecolor{black}}---->{\arrayrulecolor{black}}->{\arrayrulecolor{black}}------}
-{\normalsize\bf C} & & & $\surd$ & $\surd$ & $\surd$ & $\surd$ & $\surd$ & & & & &  \\
-%\hhline{>{\arrayrulecolor{black}}----->{\arrayrulecolor{black}}-->{\arrayrulecolor{black}}----}
+C &   &   &   &   & X & X & X &   &   &   &   &   \\
 \hline
-{\normalsize\bf D} & & & & & $\surd$ & $\surd$ & $\surd$ & $\surd$ & $\surd$ & & &  \\
-%\hhline{>{\arrayrulecolor{black}}------>{\arrayrulecolor{black}}->{\arrayrulecolor{black}}----}
+D &   &   &   &   &   & X & X & X & X & X &   &   \\
 \hline
-{\normalsize\bf E} & & & & & & $\surd$ & $\surd$ & $\surd$ & $\surd$ & $\surd$ & &  \\
-%\hhline{>{\arrayrulecolor{black}}------->{\arrayrulecolor{black}}->{\arrayrulecolor{black}}---}
+E &   &   &   &   &   & X & X & X & X & X &   &   \\
 \hline
-{\normalsize\bf F} & & & & & & & $\surd$ & $\surd$ & $\surd$ & $\surd$ & $\surd$ & \\
-% \hhline{>{\arrayrulecolor{black}}-------->{\arrayrulecolor{black}}-->{\arrayrulecolor{black}}-}
+F &   &   &   &   &   &   &   &   & X & X & X &   \\
 \hline
-{\normalsize\bf G} & & & & & & & & & $\surd$ & $\surd$ & $\surd$ &  \\
-% \hhline{>{\arrayrulecolor{black}}-------->{\arrayrulecolor{black}}-->{\arrayrulecolor{black}}-}
+G &   &   &   & X &   &   &   &   &   &   &   &   \\
 \hline
-{\normalsize\bf H} & & & & & & & & & & $\surd$ & $\surd$ & \\
-% \hhline{>{\arrayrulecolor{black}}-------->{\arrayrulecolor{black}}-->{\arrayrulecolor{black}}-}
-\hline
-{\normalsize\bf I} & & & & & & $\surd$ & $\surd$ & &  & & &  \\
-\hline
-
-{\normalsize\bf J} & & & & & & & & & & & $\surd$ & $\surd$ \\
+H &   &   &   &   &   &   &   &   &   &   &   & X \\
 \hline
   \end{tabular}
 \end{table}
-
-\vspace{1.5cm}
-\chapter{Resultados esperados}
-
-A rede neural fará o trabalho de comparar os dados amostrais utilizando conceitos de estatística. Faremos um estudo da melhor aplicação estatística entre Teste de Hipótese e Inferência Linear. Para aplicarmos Teste de Hipótese definimos a hipótese de que existe uma correlação entre as informações geradas pelos sistemas Embrace MagNet e SOHO, chamamos de Hipótese Nula (H0) e associamos uma projeção de valor teste x. Definimos também uma hipótese de que esse valor esteja errado, chamamos de Hipótese Alternativa (H1) e atribuímos valor diferente de H0 (H1 != x) . Usamos evidências fornecidas pelas amostras através dos cálculos para rejeitar ou não as hipóteses. Tal procedimento envolve mensurar quão diferente o resultado obtido é ao assumirmos o H0 como verdadeiro. Para Inferência Linear fazemos um estudo da correlação dos dados sob dois pontos de vista: Quantificamos a força dessa relação entre os dados que vamos observar, chamamos de correlação; Explicitamos a forma dessa relação, chamamos de regressão. Obtemos representação gráfica das variáveis quantitativas que chamamos de diagrama de dispersão e calculamos o coeficiente da correlação linear que nos ajudará a obter o resultado final.
-
-Ao final do projeto, esperamos demonstrar e mensurar a confiabilidade da correlação entre as informações de ambos os sistemas EMBRACE e imagens por satélites, além de podermos predizer em séries temporais os dados da rede EMBRACE a partir das imagens de satélite conhecendo o grau de confiabilidade da correlação.
 
 \vspace{1.25cm}
 \bibliography{bibliografia}

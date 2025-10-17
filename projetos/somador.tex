@@ -1,0 +1,56 @@
+\documentclass{article}
+
+\begin{document}
+
+O somador é um circuito lógico que realiza a soma dois números binários. O circuito pode ser construído a partir de soma de 1 único bit e serve de base para componentes mais complexos como processadores, unidades lógicas e aritméticas (ULA) e outros sistemas digitais. A soma binária na base binária os números são representados por apenas dois valores discretos, \textbf{0} e \textbf{1} ocorre da seguinte forma:
+
+\begin{eqnarray}
+0 + 0 = 0 \\ \nonumber
+0 + 1 = 1 \\ \nonumber
+1 + 0 = 0 \\ \nonumber
+1 + 1 = 10 \\ \nonumber
+11 + 10 = 101 \\ \nonumber
+\end{eqnarray}
+
+Um valor binário é representado como uma soma das potências de dois, da direita para esquerda, ou seja, para representar, por exemplo, o valor decimal 3 em binário, fazemos $(2^1 \times 1) + (2^0 \times 1)$ e obtemos uma representação binária de valor 11, pois o valor 1 pode ser interpretado como ``verdadeiro" e 0 como ``falso''. Agora, ilustrando o valor decimal 4 para se entender melhor, fazemos $(2^2 \times 1) + (2^1 \times 0) + (2^0 \times 0)$ e obtemos 100, pois os valores $2^1 + 2^0$. Cada dígito de um número binário representa uma potência de dois. Ou seja, de forma mais geral o número são presentados como um polinômios. Em um sistema cuja base é $b$, um número positivo $N$ representa o polinômio.
+
+\begin{eqnarray}
+N = a_{q-1}b^{q-1} + \cdots + a_{0}b^{0} + \cdots + a_{-p}b^{-p} \\ 
+= \sum^{q-1}_{i=-p} a_i b^i 
+\end{eqnarray}
+
+\noindent onde a base $b$ é um inteiro maior que 1 e os $a$ são inteiros no intervalo $0 \leq a_i \leq b - 1$. A sequência de dígitos $a_{q-1} a_{q-2} \cdots a_0$ constitui a \emph{parte inteira} de $N$, enquanto a sequência $a_{-1} a_{-2} \cdots a_{-p}$ constitui a \emph{parte fracionária} de $N$. Assim, $p$ e $q$ designam o número de dígitos nas partes fracionária e inteira, respectivamente. As partes inteira e fracionária são geralmente separadas por uma vírgula de \emph{base}. O dígito $a_{-p}$ é chamado como o dígito \emph{menos significativo} enquanto $a_{q-1}$ é chamado o dígito \emph{mais significativo}.
+
+Um somador pode ser fundamentalmente classificado em dois tipos: \textbf{meio somador} e \textbf{somador completo}. Analisando primeiro o \textbf{meio somador} obtemos:
+
+\begin{itemize}
+    \item Entradas: $A$ e $B$
+    \item Saídas:
+    \begin{enumerate}
+        \item Soma ($S = A \oplus B$)
+        \item Transporte ($Cout = A \cdot B$)
+    \end{enumerate}
+\end{itemize}
+
+É formado por duas portas lógicas, uma \texttt{XOR} e uma \texttt{AND}, sendo a \texttt{XOR} responsável pelo bit com o valor da soma enquanto a porta \texttt{AND} é responsável pelo \textit{carry bit} (bit de transporte). O bit de transporte é resultado de quando uma soma entre dois bits excede 1 (valor máximo que pode ser representado em um único bit). Nesse caso, o bit é ``transportado'' para a próxima posição mais significativa de bit, assim como o ``vai um'' na soma decimal. Analisando o \textbf{somador completo}:
+
+\begin{itemize}
+    \item Entradas: $A$, $B$, $C_{in}$
+    \item Saídas:
+    \begin{enumerate}
+        \item Soma ($S = A \oplus B \oplus C_{in}$)
+        \item Transporte ($C_{out} = (A \cdot B) + (C_{in} \cdot (A \oplus B))$)
+    \end{enumerate}
+\end{itemize}
+
+Podemos ver que a diferença entre os dois tipos de somadores é que um recebe como entrada o bit de transporte. Essa estrutura lógica permite que um somador de $n > 1$ bits seja implementado usando o bit de transporte como uma forma de cascateamento, conectando vários somadores que somam 2 bits (1 bit de cada número) por vez. Esse somador é conhecido como \textit{ripple-carry adder} (RCA), e, embora seja simples, pode ser muito lento quando há uma quantidade grande de bits, pois cada estágio depende do transporte anterior. 
+
+No geral, o somador é essencial pois é a partir dele que são implementados circuitos subtratores, multiplicadores, divisores, comparadores, e ULAs. Grande parte do tempo gasto em operações aritméticas vem da propagação do bit de transporte, por isso o estudo da otimização de somadores é importante para projetar processadores modernos.
+Por isso, existem projetos lógicos mais otimizadas, como:
+
+\begin{itemize}
+    \item \textit{Carry Lookahead Adder} (CLA)- prevê o bit de transporte com antecedência.
+    \item \textit{Carry Skip Adder} (CSA) e \textit{Carry Select Adder} - aceleram o cálculo do transporte em blocos.
+\end{itemize}
+
+\end{document}
