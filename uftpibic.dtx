@@ -1,16 +1,273 @@
-%%
-%% This is file `uftpibic.cls',
-%% generated with the docstrip utility.
-%%
-%% The original source files were:
-%%
-%% uftpibic.dtx  (with options: `class')
-%% 
-%% Copyright (C) 2026 by UFT
-%% 
-%% Este arquivo e uma versao gerada a partir do codigo-fonte original.
-%% Classe personalizada para projetos de pesquisa PIBIC e PIVIC da UFT.
-%% 
+% \iffalse meta-comment
+%
+% Copyright (C) 2026 by UFT
+%
+% \fi
+%
+% \iffalse
+%<*driver>
+\ProvidesFile{uftpibic.dtx}[2026/03/29 v2.0.2 Classe UFT PIBIC/PIVIC]
+\documentclass{ltxdoc}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{hypdoc}
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+\begin{document}
+  \DocInput{uftpibic.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \GetFileInfo{uftpibic.dtx}
+%
+% \title{Classe \texttt{uftpibic}}
+% \author{Universidade Federal do Tocantins}
+% \date{\filedate}
+%
+% \maketitle
+%
+% \section{Introdução}
+%
+% A classe \texttt{uftpibic} foi desenvolvida para padronizar documentos
+% de iniciação científica (PIBIC e PIVIC) da Universidade Federal do Tocantins.
+%
+% Ela estende a classe \texttt{book} e fornece:
+%
+% \begin{itemize}
+%   \item Formatação institucional padronizada
+%   \item Cabeçalhos com identidade visual da UFT
+%   \item Comandos de metadados simplificados
+%   \item Estrutura automática para relatórios
+% \end{itemize}
+%
+% \section{Uso Básico}
+%
+% Para utilizar a classe:
+%
+% \begin{verbatim}
+% \documentclass[12pt,consuni]{uftpibic}
+% \end{verbatim}
+%
+% Exemplo mínimo:
+%
+% \begin{verbatim}
+% \documentclass{uftpibic}
+%
+% \title{Título do Projeto}
+% \author{Nome}{Sobrenome}
+% \department{Curso}
+%
+% \advisor{Dr.}{Nome}{Sobrenome}{PhD}
+%
+% \keyword{Palavra 1}
+% \keyword{Palavra 2}
+%
+% \begin{document}
+% \maketitle
+%
+% \chapter{Introdução}
+% Texto aqui.
+%
+% \end{document}
+% \end{verbatim}
+%
+% \section{Opções da Classe}
+%
+% A classe aceita as seguintes opções:
+%
+% \subsection{Tamanho da Fonte}
+% \begin{description}
+%   \item[10pt, 11pt, 12pt] Define o tamanho base (padrão: 12pt)
+% \end{description}
+%
+% \subsection{Identidade Visual}
+% \begin{description}
+%   \item[consuni] Cor azul institucional
+%   \item[consepe] Cor verde institucional
+%   \item[geral] Cor amarela
+% \end{description}
+%
+% \subsection{Modo de Documento}
+% \begin{description}
+%   \item[report] Formato de relatório científico
+%   \item[professor] Formato simplificado para docentes
+% \end{description}
+%
+% \section{Comandos de Metadados}
+%
+% \subsection{Identificação}
+%
+% \DescribeMacro{\title}
+% Define o título do trabalho:
+% \begin{verbatim}
+% \title{Título}
+% \end{verbatim}
+%
+% \DescribeMacro{\author}
+% Define o autor:
+% \begin{verbatim}
+% \author{Nome}{Sobrenome}
+% \end{verbatim}
+%
+% \DescribeMacro{\department}
+% Define o curso:
+% \begin{verbatim}
+% \department{Licenciatura em Computação}
+% \end{verbatim}
+%
+% \subsection{Orientação}
+%
+% \DescribeMacro{\advisor}
+% Adiciona orientador(es):
+%
+% \begin{verbatim}
+% \advisor{Dr.}{Nome}{Sobrenome}{PhD}
+% \end{verbatim}
+%
+% Pode ser chamado múltiplas vezes para coorientadores.
+%
+% \subsection{Palavras-chave}
+%
+% \DescribeMacro{\keyword}
+% Adiciona palavras-chave:
+%
+% \begin{verbatim}
+% \keyword{IA}
+% \keyword{Hardware}
+% \end{verbatim}
+%
+% \subsection{Informações Institucionais}
+%
+% \begin{description}
+%   \item[\texttt{\textbackslash address}] Endereço
+%   \item[\texttt{\textbackslash city}] Cidade
+%   \item[\texttt{\textbackslash cep}] CEP
+%   \item[\texttt{\textbackslash phone}] Telefone
+%   \item[\texttt{\textbackslash mail}] Email
+% \end{description}
+%
+% \section{Comandos Específicos}
+%
+% \subsection{Tipo de Relatório}
+%
+% \DescribeMacro{\reporttype}
+%
+% Define se o relatório é parcial ou final:
+%
+% \begin{verbatim}
+% \reporttype{F} % Final
+% \reporttype{P} % Parcial
+% \end{verbatim}
+%
+% \subsection{Tipo de Projeto}
+%
+% \DescribeMacro{\projecttype}
+%
+% \begin{verbatim}
+% \projecttype{bolsa} % PIBIC
+% \projecttype{voluntario} % PIVIC
+% \end{verbatim}
+%
+% \section{Equipe}
+%
+% \DescribeMacro{\equipeexecutora}
+%
+% Adiciona membros da equipe:
+%
+% \begin{verbatim}
+% \equipeexecutora{Nome}{Categoria}
+% \end{verbatim}
+%
+% \section{Estrutura do Documento}
+%
+% O comando:
+%
+% \begin{verbatim}
+% \maketitle
+% \end{verbatim}
+%
+% gera automaticamente:
+%
+% \begin{itemize}
+%   \item Título formatado
+%   \item Autor
+%   \item Orientadores
+%   \item Palavras-chave
+% \end{itemize}
+%
+% \section{Customização}
+%
+% A classe redefine:
+%
+% \begin{itemize}
+%   \item Estilo de capítulos
+%   \item Cabeçalho institucional
+%   \item Listas de figuras e tabelas
+%   \item Espaçamento (1.5)
+% \end{itemize}
+%
+% \section{Detalhes Técnicos}
+%
+% \subsection{Base}
+%
+% A classe é baseada em:
+%
+% \begin{verbatim}
+% \LoadClass{book}
+% \end{verbatim}
+%
+% \subsection{Pacotes Utilizados}
+%
+% Principais pacotes:
+%
+% \begin{itemize}
+%   \item \texttt{geometry}
+%   \item \texttt{titlesec}
+%   \item \texttt{hyperref}
+%   \item \texttt{babel}
+%   \item \texttt{etoolbox}
+% \end{itemize}
+%
+% \subsection{Contadores}
+%
+% A classe utiliza contadores personalizados:
+%
+% \begin{itemize}
+%   \item \texttt{keywords}
+%   \item \texttt{equipe}
+% \end{itemize}
+%
+% \section{Boas Práticas}
+%
+% \begin{itemize}
+%   \item Definir todos os metadados antes de \texttt{\textbackslash begin\{document\}}
+%   \item Evitar redefinir comandos internos
+%   \item Usar codificação UTF-8
+% \end{itemize}
+%
+% \section{Limitações}
+%
+% \begin{itemize}
+%   \item Dependência de imagens institucionais
+%   \item Layout rígido para conformidade institucional
+% \end{itemize}
+%
+% \section{Conclusão}
+%
+% A classe \texttt{uftpibic} fornece uma solução completa para padronização
+% de documentos científicos da UFT, reduzindo erros de formatação e
+% aumentando a consistência institucional.
+%
+% \StopEventually{}
+%
+% \section{Código da Classe}
+%
+%
+%    \begin{macrocode}
+%<*class>
 \def\filename{uftpibic.dtx}
 \def\fileversion{v2.0.2}
 \def\filedate{2026/29/03}
@@ -460,5 +717,8 @@
 
 \ProcessOptions\relax
 \endinput
-%%
-%% End of file `uftpibic.cls'.
+%</class>
+%    \end{macrocode}
+%
+% \Finale
+\endinput
