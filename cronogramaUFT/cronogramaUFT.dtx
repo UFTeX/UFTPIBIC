@@ -1,0 +1,180 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2026 by Tiago Almeida <tiagoalmeida@uft.edu.br>
+% -------------------------------------------------------
+% 
+% Este arquivo gera o pacote cronogramaUFT e sua documentação.
+% Pode ser distribuído sob as condições da LaTeX Project Public License.
+%
+% \fi
+%
+% \iffalse
+%<*driver>
+\ProvidesFile{cronogramaUFT.dtx}
+\documentclass{ltxdoc}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{cronogramaUFT}
+\usepackage{hypdoc}
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+\begin{document}
+  \DocInput{cronogramaUFT.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \CheckSum{0}
+%
+% \changes{v1.1}{2026/03/29}{Adicionada documentação detalhada e correção de alinhamento vertical.}
+%
+% \title{O pacote \textsf{cronogramaUFT}\thanks{Este documento corresponde à versão v1.1.}}
+% \author{Tiago Almeida \\ \texttt{UFT -- Ciência da Computação} \\ \textsf{tiagoalmeida@uft.edu.br}}
+% \date{29 de Março de 2026}
+%
+% \maketitle
+%
+% \section{Introdução}
+% O pacote \textsf{cronogramaUFT} foi criado para padronizar a apresentação de cronogramas
+% em projetos de graduação e pesquisa na Universidade Federal do Tocantins (UFT).
+% Ele resolve o problema comum de manter a sincronia entre a descrição de uma atividade
+% e sua marcação temporal em tabelas distintas.
+%
+% \section{Uso do Pacote}
+%
+% O fluxo de trabalho consiste em dois passos: definir as atividades e depois renderizar a grade.
+%
+% \subsection{A Lista de Atividades}
+% \DescribeEnv{listaAtividades}
+% Este ambiente cria uma tabela contendo a descrição das tarefas. 
+% Dentro dele, utiliza-se o comando |\atividade|.
+%
+% \DescribeMacro{\atividade}
+% |\atividade{|\meta{descrição}|}{|\meta{bits}|}| \\
+% O argumento \meta{bits} deve ser uma sequência de 12 números (0 ou 1) separados por vírgula.
+% Exemplo: |\atividade{Revisão Bibliográfica}{1,1,0,0,0,0,0,0,0,0,0,0}|.
+%
+% \subsection{A Grade Temporal}
+% \DescribeEnv{gradeCronograma}
+% |\begin{gradeCronograma}[|\meta{legenda}|]{|\meta{meses}|}| \\
+% Este ambiente renderiza a grade visual. O argumento obrigatório \meta{meses} deve conter
+% os 12 nomes (ou abreviações) que aparecerão no cabeçalho, separados por vírgula.
+%
+% \section{Exemplo Prático}
+%
+% \begin{verbatim}
+% \begin{listaAtividades}[Tarefas Propostas]
+%    \atividade{Desenvolvimento em FPGA}{0,0,1,1,1,0,0,0,0,0,0,0}
+% \end{listaAtividades}
+%
+% \begin{gradeCronograma}{Set,Out,Nov,Dez,Jan,Fev,Mar,Abr,Mai,Jun,Jul,Ago}
+%    \linhaCrono{A}
+% \end{gradeCronograma}
+% \end{verbatim}
+%
+% \StopEventually{\PrintChanges\PrintIndex}
+%
+% \section{Implementação}
+% Nesta seção, detalhamos as macros internas do pacote.
+%
+%    \begin{macrocode}
+%<*package>
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{cronogramaUFT}[2026/03/29 v1.1 Cronograma UFT - Tiago Almeida]
+
+\RequirePackage{etoolbox}
+\RequirePackage{booktabs}
+\RequirePackage{array}
+\RequirePackage[table]{xcolor}
+\RequirePackage{amsfonts}
+
+% Definição de cores para o efeito Zebra
+\definecolor{cinzaclaro}{gray}{0.96}
+\definecolor{cinzazebralista}{gray}{0.93}
+\definecolor{cinzazebracrono}{gray}{0.95}
+
+% Contador alfabético para os itens (A, B, C...)
+\newcounter{linha}
+\setcounter{linha}{0}
+\renewcommand{\thelinha}{\Alph{linha}}
+
+% Macro que salva os bits de cada atividade em uma macro global nomeada
+\newcommand{\atividade}[2]{%
+  \refstepcounter{linha}%
+  \expandafter\gdef\csname cronograma\thelinha\endcsname{#2,}%
+  \textbf{\thelinha}\label{linha:\thelinha} & #1 \\ \addlinespace[4pt]
+}
+
+\makeatletter
+% Comando que recupera os dados salvos e inicia o processamento dos checks
+\newcommand{\linhaCrono}[1]{%
+  \textbf{#1}%
+  \expandafter\expandafter\expandafter\process@crono\csname cronograma#1\endcsname\@nil%
+  \\
+}
+
+% Recursão para transformar 0 em vazio e 1 em checkmark
+\def\process@crono#1,#2\@nil{%
+  & \ifnum#1=1 \checkmark \else \ \fi%
+  \ifx\relax#2\relax\else
+    \process@crono#2\@nil%
+  \fi
+}
+
+% Macro recursiva para construir o cabeçalho dinamicamente
+% O uso de \strut garante que a altura das células seja uniforme
+\def\build@header#1,#2\@nil{%
+  \gappto\headerline{& \strut \textbf{#1}}% 
+  \ifx\relax#2\relax\else
+    \build@header#2\@nil%
+  \fi
+}
+
+% Ambiente para a tabela de descrição
+\newenvironment{listaAtividades}[1][Descrição das Atividades]{%
+  \begin{table}[!ht]
+    \centering
+    \caption{#1}
+    \label{tab:atividades}
+    \renewcommand{\arraystretch}{1.3}
+    \rowcolors{2}{white}{cinzazebralista}
+    \begin{tabular}{c p{.85\linewidth}}
+      \toprule[1.5pt]
+      \rowcolor{cinzaclaro}
+      \textbf{Item} & \textbf{Descrição das Atividades Propostas} \\ \midrule[1pt]
+}{%
+      \bottomrule[1.5pt]
+    \end{tabular}
+  \end{table}
+}
+
+% --- Ajuste no Ambiente para garantir o alinhamento centralizado ---
+\newenvironment{gradeCronograma}[2][Cronograma de Execução]{%
+  \begin{table}[!ht]
+    \centering
+    \caption{#1}
+    \label{tab:cronograma}
+    %\renewcommand{\arraystretch}{1.4} % Aumentamos um pouco o respiro
+    \setlength{\tabcolsep}{3pt}
+    
+    \gdef\headerline{\strut \textbf{Item}}
+    \build@header#2,\@nil
+    
+    \rowcolors{2}{white}{cinzazebracrono}
+    % O m{22pt} em vez de p{22pt} ajuda no alinhamento vertical central
+    \begin{tabular}{c *{12}{>{\centering\arraybackslash}c}} 
+      \toprule[1.2pt]
+      \rowcolor{cinzaclaro}
+      \headerline \\ \midrule
+}{%
+      \bottomrule[1.2pt]
+    \end{tabular}
+  \end{table}
+}
+\makeatother
+%</package>
+%    \end{macrocode}
+% \Finale
+\endinput
