@@ -1,114 +1,153 @@
-# Manual de Utilização da Classe `uftpibic`
+# Manual de Utilização e Elaboração de Projetos e Relatórios de Iniciação Científica Utilizando a Classe `uftpibic.cls`
 
-A classe `uftpibic` é uma classe LaTeX personalizada, desenvolvida para a elaboração de **Relatórios de Projetos de Pesquisa PIBIC (Programa Institucional de Bolsas de Iniciação Científica) e PIVIC (Programa Voluntário de Iniciação Científica)** da Universidade Federal do Tocantins (UFT).
+A classe `uftpibic` formata **Projetos e Relatórios de Iniciação Científica (PIBIC/PIVIC)** da Universidade Federal do Tocantins (UFT), nos três formatos exigidos pelo programa: projeto do aluno, projeto do orientador e relatório parcial/final.
 
-A classe padroniza o layout, cabeçalhos, rodapés e informações essenciais do projeto.
+Este manual explica as opções de classe e os comandos necessários para montar cada um desses documentos.
 
-## 1. Uso Básico
+---
 
-Para iniciar seu documento, utilize a classe, e configure as opções de tamanho de fonte e design, se desejar:
+## 1. Pré-requisitos e Estrutura de Arquivos
+
+```
+meu-projeto/
+├── meu-projeto.tex
+├── uftpibic.cls
+└── logos/
+    ├── logouft.pdf
+    ├── Caninde.pdf
+    └── cnpq.pdf        ← usado apenas no modo `report`
+```
+
+## 2. Como Compilar
+
+```bash
+pdflatex meu-projeto.tex
+bibtex   meu-projeto        # se houver referências
+pdflatex meu-projeto.tex
+pdflatex meu-projeto.tex
+```
+
+## 3. Opções de Classe
 
 ```latex
-\documentclass[12pt, consuni, report]{uftpibic}
+\documentclass[<fonte>, <cor>, <formato>]{uftpibic}
 ```
-## 2. Opções de Classe
 
-As opções são passadas no comando `\documentclass`.
+### 3.1. Tamanho da Fonte (Padrão: 12pt)
 
-### 2.1. Tamanho da Fonte (Padrão: 12pt)
-
-Define o tamanho base do texto:
 * `10pt`
 * `11pt`
 * `12pt` (Padrão)
 
-### 2.2. Opções de Design (Cores para Elementos do Título)
+### 3.2. Identidade Visual (Cores)
 
-Define o esquema de cores principal (`cor`) para caixas de título e seções:
-* `consuni`: Define a cor principal como **Azul** (`azul`).
-* `consepe`: Define a cor principal como **Verde** (`verde`).
-* `geral`: Define a cor principal como **Amarelo** (`amarelo`) e a cor do texto da caixa de título (`cortexto`) como **Preto** (`preto`).
+* `consuni`: cor principal **Azul**.
+* `consepe`: cor principal **Verde**.
+* `geral`: cor principal **Amarela**, com texto da caixa de título em **Preto**.
 
-### 2.3. Opções de Formato do Documento
+### 3.3. Formato do Documento
 
-* **`report`**: Aplica a formatação específica para Relatórios, reconfigurando margens, cabeçalho e rodapé para um layout de relatório PIBIC. No modo `report`, o rodapé inclui logotipos da UFT e do CNPq.
-* **`professor`**: Altera a formatação para um resumo do projeto com foco no Orientador, ajustando as margens e a saída de `\maketitle`.
+| Opção | Uso | Efeito no `\maketitle` |
+| :--- | :--- | :--- |
+| *(nenhuma)* | Projeto do aluno | Mostra Nome do Aluno, Curso, Orientador(es) e Palavras-chave. |
+| `professor` | Projeto do orientador | Mostra Título, Orientador(es), Curso, Local de Execução, **Equipe Executora** e Palavras-chave. Margens e cabeçalho próprios. |
+| `report` | Relatório parcial/final | Folha de rosto com Título, Autor, Orientador(es), Grande Área e Palavras-chave. Rodapé com logos da UFT e do CNPq. |
 
-## 3. Comandos de Configuração (Metadados do Projeto)
-
-Estes comandos devem ser definidos no preâmbulo (antes de `\begin{document}`).
-
-| Comando | Argumentos | Função | Exemplo de Uso |
-| :--- | :--- | :--- | :--- |
-| `\title{#1}` | Título do Projeto | Define o título principal do projeto. | `\title{Análise de Dados Climáticos do Tocantins}` |
-| `\author{#1}{#2}` | Nome, Sobrenome | Nome e sobrenome do **aluno/bolsista**. | `\author{Ana}{Pereira}` |
-| `\advisor{#1}{#2}{#3}{#4}` | Profissão, Nome, Sobrenome, Titulação | Dados do **Orientador**. Use mais de uma vez para Coorientador(es). | `\advisor{Prof.}{Carlos}{Rocha}{Dr.}` |
-| `\keyword{#1}` | Palavra-chave | Adiciona uma palavra-chave (pode ser usado múltiplas vezes). | `\keyword{Climatologia}` `\keyword{Machine Learning}` |
-| `\department{#1}` | Nome do Curso | Curso/Unidade Acadêmica do aluno. | `\department{Ciência da Computação}` |
-| `\area{#1}` | Grande Área CNPq | Grande área do conhecimento. | `\area{Ciências Exatas e da Terra}` |
-| `\city{#1}` | Cidade do Campus | Cidade do Campus onde o projeto é desenvolvido. | `\city{Palmas}` |
-| `\local{#1}` | Local de Execução | Local de execução da pesquisa. | `\local{Laboratório de Sistemas}` |
-| `\equipeexecutora{#1}{#2}` | Nome, Categoria | Adiciona um membro da equipe. Impresso apenas no `\maketitle` da opção `professor` (nas demais, o dado é armazenado mas não exibido). | `\equipeexecutora{Pedro Santos}{Voluntário}` |
-
-## 4. Exemplo de Estrutura de Documento
-
-O código a seguir demonstra a montagem do preâmbulo e a estrutura básica do relatório:
+Essas três opções são mutuamente exclusivas — escolha uma por documento. As opções de fonte e cor (3.1 e 3.2) podem ser combinadas livremente com qualquer uma delas.
 
 ```latex
-\documentclass[12pt, consuni, report]{uftpibic}
+\documentclass[12pt, consuni]{uftpibic}            % projeto do aluno
+\documentclass[12pt, consuni, professor]{uftpibic}  % projeto do orientador
+\documentclass[12pt, report]{uftpibic}              % relatório
+```
 
-% 1. Dados do Bolsista e Título
-\author{Ana}{Pereira}
-\title{Análise de Dados Climáticos do Tocantins: Um Estudo de Caso}
+## 4. Comandos de Metadados
 
-% 2. Dados do Orientador (e Coorientador)
-\advisor{Prof.}{Carlos}{Rocha}{Dr.}
-\advisor{Profa.}{Beatriz}{Sousa}{Ms.} % Coorientador (2ª chamada de \advisor)
+Devem ser declarados no **preâmbulo**, antes de `\begin{document}`.
 
-% 3. Informações do Projeto
-\department{Ciência da Computação}
-\area{CIÊNCIAS EXATAS E DA TERRA}
-\keyword{Climatologia}
-\keyword{Machine Learning}
-\keyword{Análise de Séries Temporais}
+| Comando | Argumentos | Função | Exemplo |
+| :--- | :--- | :--- | :--- |
+| `\title{#1}` | Título | Título do projeto/relatório. | `\title{Análise de Dados Climáticos}` |
+| `\author{#1}{#2}` | Nome, Sobrenome | Nome do aluno/bolsista. | `\author{Ana}{Pereira}` |
+| `\advisor{#1}{#2}{#3}{#4}` | Título, Nome, Sobrenome, Grau | Orientador. Repita para coorientador(es). | `\advisor{Prof.}{Carlos}{Rocha}{Dr.}` |
+| `\department{#1}` | Nome do Curso | Curso do aluno. | `\department{Ciência da Computação}` |
+| `\area{#1}` | Grande Área CNPq | Grande área do conhecimento. Impressa apenas no modo `report`. | `\area{Ciências Exatas e da Terra}` |
+| `\local{#1}` | Local de Execução | Local onde a pesquisa é executada. Impresso apenas no modo `professor`. | `\local{Laboratório de Sistemas}` |
+| `\equipeexecutora{#1}{#2}` | Nome, Categoria | Membro da equipe. Repetível. Impresso apenas no modo `professor`. | `\equipeexecutora{Pedro Santos}{Voluntário}` |
+| `\keyword{#1}` | Palavra-chave | Adiciona uma palavra-chave. Repetível. | `\keyword{Machine Learning}` |
+| `\city{#1}` | Cidade | Cidade do Campus (usada no cabeçalho institucional). | `\city{Palmas}` |
+| `\address{#1}` | Endereço | Endereço institucional (cabeçalho). | `\address{Av. NS 15, Bloco B}` |
+| `\cep{#1}` | CEP | CEP do Campus (cabeçalho). | `\cep{77000-000}` |
+| `\phone{#1}` | Telefone | Telefone institucional (cabeçalho). | `\phone{(63) 3232-0000}` |
+| `\mail{#1}` | E-mail | E-mail institucional (cabeçalho). | `\mail{propesq@uft.edu.br}` |
 
-% 4. Dados do Campus (usados no cabeçalho)
-\city{Palmas}
-\address{Av. NS 15, Bloco B}
-\cep{77000-000}
-\phone{(63) 3232-0000}
-\mail{propesq@uft.edu.br}
+## 5. Estrutura do Documento
+
+```latex
+\documentclass[12pt, consuni]{uftpibic}
+
+% metadados aqui (Seção 4)
 
 \begin{document}
 
-% Gera a Folha de Rosto e dados de projeto (usando o formato 'report')
 \maketitle
 
-% Estrutura do Relatório
-\chapter{Introdução e Revisão Bibliográfica}
-    A introdução do relatório final deve apresentar o problema de pesquisa e a justificativa.
-\section{Objetivos Propostos}
-    Nesta seção, revisamos os objetivos definidos no plano de trabalho...
+\chapter{Introdução}
+...
+\chapter{Objetivos}
+...
 
-\chapter{Metodologia}
-    A metodologia utilizada...
-
-\chapter{Resultados e Discussão}
-    Os principais resultados obtidos...
+\bibliography{bibliografia}
 
 \end{document}
 ```
 
-## 5. Formato de Layout e Estilo
+* `\maketitle` deve ser chamado uma única vez, logo após `\begin{document}`. Ele imprime a folha de rosto no formato correspondente à opção escolhida (Seção 3.3).
+* A partir daí o documento segue a estrutura normal da classe `book`: `\chapter`, `\section`, tabelas, figuras, etc.
 
-* **Margens:** O layout padrão tem margens definidas para `top=5cm`, `bottom=2cm`, `left=2cm`, `right=2cm`. O modo `report` ajusta a margem inferior para `3cm`.
-* **Espaçamento:** O espaçamento de linha padrão é de 1.5 (`\renewcommand{\baselinestretch}{1.5}`).
-* **Títulos:**
-    * `\chapter` é formatado em uma caixa colorida.
-    * `\section` é formatado em uma caixa colorida com o número da seção e o título separados por travessão.
-* **Numeração:** A numeração de Equações, Figuras e Tabelas é contínua e não reinicia a cada capítulo (`\counterwithout`).
-* **Comando Principal:** O comando `\maketitle` gera o cabeçalho completo com informações da PROPESQ e os dados do projeto.
+## 6. Formatação Automática
 
----
+* **Margens:** `top=5cm`, `bottom=2cm` (`3cm` no modo `report`), `left=2cm`, `right=2cm`.
+* **Espaçamento:** 1,5 entre linhas.
+* **Capítulos e seções:** formatados em caixa colorida (cor definida pela Seção 3.2).
+* **Numeração:** Equações, Figuras e Tabelas têm numeração contínua, sem reiniciar a cada capítulo.
+* **Links:** `hyperref` já configurado, com cores neutras (preto/azul apenas para URLs).
 
-*Para outros modelos acadêmicos da UFT, visite a organização [UFTeX](https://github.com/UFTeX).*
+## 7. Exemplo Completo (Projeto do Aluno)
+
+```latex
+\documentclass[12pt, consuni]{uftpibic}
+
+\address{Quadra 109 Norte, Av. NS 15, ALCNO 14, Prédio da Reitoria, Proesq}
+\cep{77001-090}
+\phone{(63) 3229-4037}
+\mail{pibic@uft.edu.br}
+\city{Palmas}
+
+\title{Análise de Dados Climáticos do Tocantins}
+\advisor{Prof.}{Carlos}{Rocha}{Dr.}
+\author{Ana}{Pereira}
+\department{Ciência da Computação}
+\keyword{Climatologia}
+\keyword{Machine Learning}
+
+\begin{document}
+
+\maketitle
+
+\chapter{Introdução}
+Texto aqui.
+
+\chapter{Objetivos}
+Texto aqui.
+
+\bibliography{bibliografia}
+
+\end{document}
+```
+
+## 8. Notas e Limitações
+
+* Os comandos `\campus`, `\grupo`, `\financiamento`, `\reporttype`, `\projecttype`, `\datainicio` e `\dataconclusao` **não existem mais** a partir da v2.1.0 — eram campos que armazenavam valor mas nunca eram impressos em nenhum `\maketitle`. Se você tem um `.tex` antigo que os usa, basta remover as chamadas.
+* `\area` só aparece no modo `report`; `\local` e `\equipeexecutora` só aparecem no modo `professor`. Definir esses comandos em outro modo não gera erro, mas o valor não será exibido.
+* O logo da UFT deve estar em `logos/logouft.pdf` (ou similar); o modo `report` também espera `logos/Caninde.pdf` e `logos/cnpq.pdf`.
