@@ -6,7 +6,7 @@
 %
 % \iffalse
 %<*driver>
-\ProvidesFile{uftpibic.dtx}[2026/03/29 v2.0.2 Classe UFT PIBIC/PIVIC]
+\ProvidesFile{uftpibic.dtx}[2026/07/09 v2.1.0 Classe UFT PIBIC/PIVIC]
 \documentclass{ltxdoc}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -149,28 +149,6 @@
 %   \item[\texttt{\textbackslash mail}] Email
 % \end{description}
 %
-% \section{Comandos Específicos}
-%
-% \subsection{Tipo de Relatório}
-%
-% \DescribeMacro{\reporttype}
-%
-% Define se o relatório é parcial ou final:
-%
-% \begin{verbatim}
-% \reporttype{F} % Final
-% \reporttype{P} % Parcial
-% \end{verbatim}
-%
-% \subsection{Tipo de Projeto}
-%
-% \DescribeMacro{\projecttype}
-%
-% \begin{verbatim}
-% \projecttype{bolsa} % PIBIC
-% \projecttype{voluntario} % PIVIC
-% \end{verbatim}
-%
 % \section{Equipe}
 %
 % \DescribeMacro{\equipeexecutora}
@@ -269,8 +247,8 @@
 %    \begin{macrocode}
 %<*class>
 \def\filename{uftpibic.dtx}
-\def\fileversion{v2.0.2}
-\def\filedate{2026/29/03}
+\def\fileversion{v2.1.0}
+\def\filedate{2026/07/09}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass {uftpibic} [\filedate\ \fileversion\ Classe personalizada para projetos de pesquisa PIBIC e PIVIC da UFT]
 
@@ -356,31 +334,14 @@
 
 \renewcommand\title[1]{\global\def\local@title{#1}}
 
-\newcommand\reporttype[1]{%
-    \ifthenelse{\equal{#1}{F}}
-        {\global\def\local@reporttype{Final}}
-        {\global\def\local@reporttype{Parcial}}%
-}
-
-\newcommand\projecttype[1]{%
-    \ifthenelse{\equal{#1}{bolsa}}
-        {\global\def\local@projecttype{PIBIC}}
-        {\global\def\local@projecttype{PIVIC}}%
-}
-
 \newcommand\address[1]{\global\def\local@address{#1}}
-\newcommand\datainicio[1]{\global\def\local@datainicio{#1}}
-\newcommand\dataconclusao[1]{\global\def\local@dataconclusao{#1}}
 \newcommand\cep[1]{\global\def\local@cep{#1}}
 \newcommand\phone[1]{\global\def\local@phone{#1}}
 \newcommand\mail[1]{\global\def\local@mail{#1}}
 \newcommand\department[1]{\global\def\local@department{#1}}
 \newcommand\city[1]{\global\def\local@city{#1}}
-\newcommand\campus[1]{\global\def\local@campus{#1}}
 \newcommand\local[1]{\global\def\local@local{#1}}
 \newcommand\area[1]{\global\def\local@area{#1}}
-\newcommand\grupo[1]{\global\def\local@grupo{#1}}
-\newcommand\financiamento[1]{\global\def\local@financiamento{#1}}
 
 \newcounter{keywords}
 \newcommand\keyword[1]{%
@@ -393,22 +354,6 @@
     \global\@namedef{uftNome:\expandafter\the\c@equipe}{#1}%
     \global\@namedef{uftCategoria:\expandafter\the\c@equipe}{#2}%
     \global\addtocounter{equipe}{1}%
-}
-
-\renewcommand\date[3]{%
-    \day=#1
-    \month=#2
-    \year=#3
-}
-
-\newcommand\monthname{%
-    \ifcase\month\or Janeiro\or Fevereiro\or Mar{\c c}o\or Abril\or Maio\or Junho\or
-    Julho\or Agosto\or Setembro\or Outubro\or Novembro\or Dezembro\fi
-}
-
-\newcommand\global@monthname{%
-    \ifcase\month\or Janeiro\or Fevereiro\or Mar{\c c}o\or Abril\or Maio\or Junho\or
-    Julho\or Agosto\or Setembro\or Outubro\or Novembro\or Dezembro\fi
 }
 
 \newcommand\local@advisorstring{Orientador}
@@ -538,11 +483,6 @@
 \renewcommand\author[2]{%
     \global\def\@authname{#1}
     \global\def\@authsurn{#2}
-}
-
-\newcommand\term[2]{
-    \global\def\@termyear{#1}
-    \global\def\@termnumber{#2}
 }
 
 \DeclareOption{report}{

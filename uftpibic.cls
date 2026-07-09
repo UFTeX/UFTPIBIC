@@ -99,31 +99,14 @@
 
 \renewcommand\title[1]{\global\def\local@title{#1}}
 
-\newcommand\reporttype[1]{%
-    \ifthenelse{\equal{#1}{F}}
-        {\global\def\local@reporttype{Final}}
-        {\global\def\local@reporttype{Parcial}}%
-}
-
-\newcommand\projecttype[1]{%
-    \ifthenelse{\equal{#1}{bolsa}}
-        {\global\def\local@projecttype{PIBIC}}
-        {\global\def\local@projecttype{PIVIC}}%
-}
-
 \newcommand\address[1]{\global\def\local@address{#1}}
-\newcommand\datainicio[1]{\global\def\local@datainicio{#1}}
-\newcommand\dataconclusao[1]{\global\def\local@dataconclusao{#1}}
 \newcommand\cep[1]{\global\def\local@cep{#1}}
 \newcommand\phone[1]{\global\def\local@phone{#1}}
 \newcommand\mail[1]{\global\def\local@mail{#1}}
 \newcommand\department[1]{\global\def\local@department{#1}}
 \newcommand\city[1]{\global\def\local@city{#1}}
-\newcommand\campus[1]{\global\def\local@campus{#1}}
 \newcommand\local[1]{\global\def\local@local{#1}}
 \newcommand\area[1]{\global\def\local@area{#1}}
-\newcommand\grupo[1]{\global\def\local@grupo{#1}}
-\newcommand\financiamento[1]{\global\def\local@financiamento{#1}}
 
 \newcounter{keywords}
 \newcommand\keyword[1]{%
@@ -136,22 +119,6 @@
     \global\@namedef{uftNome:\expandafter\the\c@equipe}{#1}%
     \global\@namedef{uftCategoria:\expandafter\the\c@equipe}{#2}%
     \global\addtocounter{equipe}{1}%
-}
-
-\renewcommand\date[3]{%
-    \day=#1
-    \month=#2
-    \year=#3
-}
-
-\newcommand\monthname{%
-    \ifcase\month\or Janeiro\or Fevereiro\or Mar{\c c}o\or Abril\or Maio\or Junho\or
-    Julho\or Agosto\or Setembro\or Outubro\or Novembro\or Dezembro\fi
-}
-
-\newcommand\global@monthname{%
-    \ifcase\month\or Janeiro\or Fevereiro\or Mar{\c c}o\or Abril\or Maio\or Junho\or
-    Julho\or Agosto\or Setembro\or Outubro\or Novembro\or Dezembro\fi
 }
 
 \newcommand\local@advisorstring{Orientador}
@@ -281,11 +248,6 @@
 \renewcommand\author[2]{%
     \global\def\@authname{#1}
     \global\def\@authsurn{#2}
-}
-
-\newcommand\term[2]{
-    \global\def\@termyear{#1}
-    \global\def\@termnumber{#2}
 }
 
 \DeclareOption{report}{

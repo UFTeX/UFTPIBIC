@@ -43,15 +43,12 @@ Estes comandos devem ser definidos no preâmbulo (antes de `\begin{document}`).
 | `\title{#1}` | Título do Projeto | Define o título principal do projeto. | `\title{Análise de Dados Climáticos do Tocantins}` |
 | `\author{#1}{#2}` | Nome, Sobrenome | Nome e sobrenome do **aluno/bolsista**. | `\author{Ana}{Pereira}` |
 | `\advisor{#1}{#2}{#3}{#4}` | Profissão, Nome, Sobrenome, Titulação | Dados do **Orientador**. Use mais de uma vez para Coorientador(es). | `\advisor{Prof.}{Carlos}{Rocha}{Dr.}` |
-| `\reporttype{#1}` | `F` ou `P` | Define se o relatório é **Final** (`F`) ou **Parcial** (`P`). | `\reporttype{F}` |
-| `\projecttype{#1}` | `bolsa` ou outro | Define o tipo de projeto: **PIBIC** (`bolsa`) ou **PIVIC** (outro valor). | `\projecttype{bolsa}` |
 | `\keyword{#1}` | Palavra-chave | Adiciona uma palavra-chave (pode ser usado múltiplas vezes). | `\keyword{Climatologia}` `\keyword{Machine Learning}` |
 | `\department{#1}` | Nome do Curso | Curso/Unidade Acadêmica do aluno. | `\department{Ciência da Computação}` |
 | `\area{#1}` | Grande Área CNPq | Grande área do conhecimento. | `\area{Ciências Exatas e da Terra}` |
 | `\city{#1}` | Cidade do Campus | Cidade do Campus onde o projeto é desenvolvido. | `\city{Palmas}` |
 | `\local{#1}` | Local de Execução | Local de execução da pesquisa. | `\local{Laboratório de Sistemas}` |
-| `\datainicio{#1}` | Data de Início | Data de início do projeto (dado armazenado, não impresso no `\maketitle` padrão). | `\datainicio{01/08/2024}` |
-| `\equipeexecutora{#1}{#2}` | Nome, Categoria | Adiciona um membro da equipe (dado armazenado, não impresso no `\maketitle` padrão). | `\equipeexecutora{Pedro Santos}{Voluntário}` |
+| `\equipeexecutora{#1}{#2}` | Nome, Categoria | Adiciona um membro da equipe. Impresso apenas no `\maketitle` da opção `professor` (nas demais, o dado é armazenado mas não exibido). | `\equipeexecutora{Pedro Santos}{Voluntário}` |
 
 ## 4. Exemplo de Estrutura de Documento
 
@@ -64,22 +61,18 @@ O código a seguir demonstra a montagem do preâmbulo e a estrutura básica do r
 \author{Ana}{Pereira}
 \title{Análise de Dados Climáticos do Tocantins: Um Estudo de Caso}
 
-% 2. Tipo de Projeto e Relatório
-\reporttype{F}         % Relatório Final
-\projecttype{bolsa}    % Projeto PIBIC
-
-% 3. Dados do Orientador (e Coorientador)
+% 2. Dados do Orientador (e Coorientador)
 \advisor{Prof.}{Carlos}{Rocha}{Dr.}
 \advisor{Profa.}{Beatriz}{Sousa}{Ms.} % Coorientador (2ª chamada de \advisor)
 
-% 4. Informações do Projeto
+% 3. Informações do Projeto
 \department{Ciência da Computação}
 \area{CIÊNCIAS EXATAS E DA TERRA}
 \keyword{Climatologia}
 \keyword{Machine Learning}
 \keyword{Análise de Séries Temporais}
 
-% 5. Dados do Campus (usados no cabeçalho)
+% 4. Dados do Campus (usados no cabeçalho)
 \city{Palmas}
 \address{Av. NS 15, Bloco B}
 \cep{77000-000}
